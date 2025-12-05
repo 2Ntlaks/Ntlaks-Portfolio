@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# Ntlaks Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Portfolio Preview](public/og-image.png)
 
-Currently, two official plugins are available:
+🌐 **Live:** [ntlaks.dev](https://ntlaks.dev)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Personal portfolio website for **Ntlakanipho Mgaguli** — Computer Engineering student, WebGL instructor, and tutor based in Cape Town, South Africa.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Interactive WebGL Background** — Custom 3D rotating cube with shaders
+- **Responsive Design** — Mobile-first, works on all devices
+- **Modern Stack** — React, Vite, Tailwind CSS
+- **SEO Optimized** — Meta tags, Open Graph, Twitter cards
+- **Fast Performance** — Optimized build with Vite
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Framework:** React 19
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS 4
+- **3D Graphics:** WebGL + gl-matrix
+- **Deployment:** Netlify
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Quick Start
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/
+│   ├── Hero.jsx        # Landing section with WebGL
+│   ├── About.jsx       # Bio, journey, skills
+│   ├── Projects.jsx    # Featured work
+│   ├── Contact.jsx     # Get in touch
+│   ├── Navbar.jsx      # Navigation
+│   └── Footer.jsx      # Footer links
+├── webgl/
+│   ├── renderer.js     # WebGL setup & render loop
+│   └── shaders.js      # Vertex & fragment shaders
+└── assets/
+    └── profile.jpg     # Profile photo
+```
+
+## 🔗 Links
+
+- **Portfolio:** [ntlaks.dev](https://ntlaks.dev)
+- **Udemy Course:** [WebGL for Beginners](https://www.udemy.com/user/ntlakanipho-mgaguli/)
+- **GitHub:** [@2Ntlaks](https://github.com/2Ntlaks)
+- **LinkedIn:** [Ntlakanipho Mgaguli](https://www.linkedin.com/in/ntlakanipho-mgaguli-36a1ab319/)
+
+## 📝 License
+
+MIT  Ntlakanipho Mgaguli
