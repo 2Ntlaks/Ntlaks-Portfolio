@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <a
-          href="#"
+          href="/"
           className="text-2xl font-mono font-bold text-white tracking-tighter"
         >
           NTLAKS<span className="text-primary">.DEV</span>
@@ -25,12 +25,18 @@ const Navbar = () => {
           {navLinks.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`/#${item.toLowerCase()}`}
               className="text-sm font-mono text-slate-400 hover:text-primary transition-colors"
             >
               {item}
             </a>
           ))}
+          <a
+            href="/blog"
+            className="text-sm font-mono text-slate-400 hover:text-primary transition-colors"
+          >
+            Blog
+          </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
@@ -76,13 +82,20 @@ const Navbar = () => {
           {navLinks.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`/#${item.toLowerCase()}`}
               onClick={handleLinkClick}
               className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5"
             >
               {item}
             </a>
           ))}
+          <a
+            href="/blog"
+            onClick={handleLinkClick}
+            className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5"
+          >
+            Blog
+          </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"

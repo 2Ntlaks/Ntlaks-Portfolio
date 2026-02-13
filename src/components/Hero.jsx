@@ -48,8 +48,15 @@ const Hero = () => {
 
         {/* Role */}
         <p className="text-slate-400 text-lg sm:text-xl md:text-2xl mb-12 font-light">
-          Computer Engineering Student <span className="text-slate-600">•</span>{" "}
-          WebGL Instructor <span className="text-slate-600">•</span> Tutor
+          Computer Engineering Student{" "}
+          <span aria-hidden="true" className="text-slate-600">
+            &bull;
+          </span>{" "}
+          WebGL Instructor{" "}
+          <span aria-hidden="true" className="text-slate-600">
+            &bull;
+          </span>{" "}
+          Tutor
         </p>
 
         {/* CTA Buttons */}

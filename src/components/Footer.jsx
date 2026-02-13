@@ -15,6 +15,12 @@ const Footer = () => {
 
         <div className="flex items-center gap-6">
           <a
+            href="/blog"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            Blog
+          </a>
+          <a
             href="https://github.com/2Ntlaks"
             target="_blank"
             rel="noopener noreferrer"
@@ -39,7 +45,7 @@ const Footer = () => {
         </div>
 
         <div className="text-slate-600 text-xs font-mono">
-          © {new Date().getFullYear()} Ntlaks.dev
+          &copy; {new Date().getFullYear()} Ntlaks.dev
         </div>
       </div>
     </footer>
