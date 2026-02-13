@@ -25,3 +25,9 @@
     @apply font-mono font-bold tracking-tight;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce {
+    animation: none !important;
+  }
+}

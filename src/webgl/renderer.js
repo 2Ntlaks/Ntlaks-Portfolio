@@ -1,70 +1,94 @@
-import { vertexShaderSource, fragmentShaderSource } from './shaders';
-import { mat4 } from 'gl-matrix'; // We might need to install gl-matrix or write a simple math helper. 
-// For a portfolio, let's write a simple math helper to avoid dependencies if possible, 
-// OR just use a library. Given the user is an instructor, they might appreciate a dependency-free approach 
-// BUT for time and reliability, I'll check if I can install gl-matrix or just implement a simple rotation.
-// Actually, let's install gl-matrix for robust math.
+import { vertexShaderSource, fragmentShaderSource } from "./shaders";
 
 export class WebGLRenderer {
-  constructor(canvas) {
+  constructor(canvas, options = {}) {
     this.canvas = canvas;
-    this.gl = canvas.getContext('webgl');
-    
-    if (!this.gl) {
-      console.error('Unable to initialize WebGL.');
+    this.options = {
+      reducedMotion: Boolean(options.reducedMotion),
+      isMobile: Boolean(options.isMobile),
+    };
+
+    this.gl = canvas.getContext("webgl", {
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance",
+      premultipliedAlpha: false,
+    });
+
+    this.isReady = Boolean(this.gl);
+    if (!this.isReady) {
+      console.error("Unable to initialize WebGL.");
       return;
     }
 
-    this.initShaders();
+    this.pointer = {
+      x: 0.5,
+      y: 0.5,
+      targetX: 0.5,
+      targetY: 0.5,
+    };
+
+    this.timeOffset = Math.random() * 100.0;
+    this.startTime = 0;
+    this.motionIntensity = this.options.reducedMotion ? 0.2 : 1.0;
+    this.pixelRatioCap = this.options.isMobile ? 1.2 : 1.75;
+    this.uniformScale = this.options.isMobile ? 0.86 : 1.0;
+
+    this.initProgram();
     this.initBuffers();
-    
-    this.rotation = 0.0;
-    this.then = 0;
   }
 
-  initShaders() {
+  initProgram() {
     const gl = this.gl;
-    const shaderProgram = this.initShaderProgram(gl, vertexShaderSource, fragmentShaderSource);
-    
+    const program = this.createProgram(vertexShaderSource, fragmentShaderSource);
+
     this.programInfo = {
-      program: shaderProgram,
+      program,
       attribLocations: {
-        vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
-        vertexColor: gl.getAttribLocation(shaderProgram, 'aVertexColor'),
+        position: gl.getAttribLocation(program, "aPosition"),
       },
       uniformLocations: {
-        projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
-        modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+        time: gl.getUniformLocation(program, "uTime"),
+        resolution: gl.getUniformLocation(program, "uResolution"),
+        pointer: gl.getUniformLocation(program, "uPointer"),
+        motionIntensity: gl.getUniformLocation(program, "uMotionIntensity"),
       },
     };
   }
 
-  initShaderProgram(gl, vsSource, fsSource) {
-    const vertexShader = this.loadShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fragmentShader = this.loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+  createProgram(vertexSource, fragmentSource) {
+    const gl = this.gl;
+    const vertexShader = this.loadShader(gl.VERTEX_SHADER, vertexSource);
+    const fragmentShader = this.loadShader(gl.FRAGMENT_SHADER, fragmentSource);
 
-    const shaderProgram = gl.createProgram();
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
-    gl.linkProgram(shaderProgram);
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
 
-    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-      console.error('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
-      return null;
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      const message = gl.getProgramInfoLog(program);
+      gl.deleteProgram(program);
+      throw new Error(`Failed to link shader program: ${message}`);
     }
 
-    return shaderProgram;
+    gl.deleteShader(vertexShader);
+    gl.deleteShader(fragmentShader);
+
+    return program;
   }
 
-  loadShader(gl, type, source) {
+  loadShader(type, source) {
+    const gl = this.gl;
     const shader = gl.createShader(type);
+
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
 
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+      const message = gl.getShaderInfoLog(shader);
       gl.deleteShader(shader);
-      return null;
+      throw new Error(`Failed to compile shader: ${message}`);
     }
 
     return shader;
@@ -72,208 +96,121 @@ export class WebGLRenderer {
 
   initBuffers() {
     const gl = this.gl;
-
-    // Create a buffer for the square's positions.
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    // Create an Icosahedron (20-sided die shape) for a "tech" look
-    // For simplicity in this demo, let's do a wireframe Cube first.
     const positions = [
-      // Front face
-      -1.0, -1.0,  1.0,
-       1.0, -1.0,  1.0,
-       1.0,  1.0,  1.0,
-      -1.0,  1.0,  1.0,
-      
-      // Back face
-      -1.0, -1.0, -1.0,
-      -1.0,  1.0, -1.0,
-       1.0,  1.0, -1.0,
-       1.0, -1.0, -1.0,
-       
-      // Top face
-      -1.0,  1.0, -1.0,
-      -1.0,  1.0,  1.0,
-       1.0,  1.0,  1.0,
-       1.0,  1.0, -1.0,
-       
-      // Bottom face
-      -1.0, -1.0, -1.0,
-       1.0, -1.0, -1.0,
-       1.0, -1.0,  1.0,
-      -1.0, -1.0,  1.0,
-      
-      // Right face
-       1.0, -1.0, -1.0,
-       1.0,  1.0, -1.0,
-       1.0,  1.0,  1.0,
-       1.0, -1.0,  1.0,
-       
-      // Left face
-      -1.0, -1.0, -1.0,
-      -1.0, -1.0,  1.0,
-      -1.0,  1.0,  1.0,
-      -1.0,  1.0, -1.0,
+      -1.0, -1.0,
+      1.0, -1.0,
+      -1.0, 1.0,
+      -1.0, 1.0,
+      1.0, -1.0,
+      1.0, 1.0,
     ];
 
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+    this.positionBuffer = positionBuffer;
+  }
 
-    const colorBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+  setReducedMotion(enabled) {
+    this.motionIntensity = enabled ? 0.2 : 1.0;
+  }
 
-    // Cyan and Magenta colors
-    const faceColors = [
-      [0.0, 0.94, 1.0, 1.0],    // Cyan
-      [1.0, 0.0, 0.23, 1.0],    // Magenta
-      [0.0, 0.94, 1.0, 1.0],    // Cyan
-      [1.0, 0.0, 0.23, 1.0],    // Magenta
-      [0.0, 0.94, 1.0, 1.0],    // Cyan
-      [1.0, 0.0, 0.23, 1.0],    // Magenta
-    ];
-
-    let colors = [];
-    for (var j = 0; j < faceColors.length; ++j) {
-      const c = faceColors[j];
-      // Repeat each color 4 times for the 4 vertices of the face
-      colors = colors.concat(c, c, c, c);
+  setPointer(clientX, clientY) {
+    const rect = this.canvas.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) {
+      return;
     }
 
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+    const x = (clientX - rect.left) / rect.width;
+    const y = 1.0 - (clientY - rect.top) / rect.height;
 
-    const indexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+    this.pointer.targetX = Math.min(Math.max(x, 0.0), 1.0);
+    this.pointer.targetY = Math.min(Math.max(y, 0.0), 1.0);
+  }
 
-    const indices = [
-      0,  1,  2,      0,  2,  3,    // front
-      4,  5,  6,      4,  6,  7,    // back
-      8,  9,  10,     8,  10, 11,   // top
-      12, 13, 14,     12, 14, 15,   // bottom
-      16, 17, 18,     16, 18, 19,   // right
-      20, 21, 22,     20, 22, 23,   // left
-    ];
-
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-
-    this.buffers = {
-      position: positionBuffer,
-      color: colorBuffer,
-      indices: indexBuffer,
-    };
+  clearPointer() {
+    this.pointer.targetX = 0.5;
+    this.pointer.targetY = 0.5;
   }
 
   resize() {
-    const displayWidth  = this.canvas.clientWidth;
+    const displayWidth = this.canvas.clientWidth;
     const displayHeight = this.canvas.clientHeight;
 
-    if (this.canvas.width  !== displayWidth ||
-        this.canvas.height !== displayHeight) {
+    if (displayWidth <= 0 || displayHeight <= 0) {
+      return;
+    }
 
-      this.canvas.width  = displayWidth;
-      this.canvas.height = displayHeight;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, this.pixelRatioCap);
+    const width = Math.floor(displayWidth * pixelRatio);
+    const height = Math.floor(displayHeight * pixelRatio);
+
+    if (this.canvas.width !== width || this.canvas.height !== height) {
+      this.canvas.width = width;
+      this.canvas.height = height;
     }
   }
 
-  render(now) {
-    now *= 0.001;  // convert to seconds
-    const deltaTime = now - this.then;
-    this.then = now;
+  render(nowMs) {
+    if (!this.isReady) {
+      return;
+    }
+
+    const gl = this.gl;
+    if (this.startTime === 0) {
+      this.startTime = nowMs * 0.001;
+    }
+
+    const now = nowMs * 0.001;
+    const time = (now - this.startTime) * this.uniformScale + this.timeOffset;
+
+    this.pointer.x += (this.pointer.targetX - this.pointer.x) * 0.08;
+    this.pointer.y += (this.pointer.targetY - this.pointer.y) * 0.08;
 
     this.resize();
-    const gl = this.gl;
-
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.clearColor(0.0, 0.0, 0.0, 0.0);  // Clear to transparent
-    gl.clearDepth(1.0);                 // Clear everything
-    gl.enable(gl.DEPTH_TEST);           // Enable depth testing
-    gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
-
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-    const fieldOfView = 45 * Math.PI / 180;   // in radians
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-    const zNear = 0.1;
-    const zFar = 100.0;
-    const projectionMatrix = mat4.create();
-
-    mat4.perspective(projectionMatrix,
-                     fieldOfView,
-                     aspect,
-                     zNear,
-                     zFar);
-
-    const modelViewMatrix = mat4.create();
-
-    mat4.translate(modelViewMatrix,     // destination matrix
-                   modelViewMatrix,     // matrix to translate
-                   [0.0, 0.0, -6.0]);  // amount to translate
-
-    mat4.rotate(modelViewMatrix,  // destination matrix
-                modelViewMatrix,  // matrix to rotate
-                this.rotation,    // amount to rotate in radians
-                [0, 0, 1]);       // axis to rotate around (Z)
-    mat4.rotate(modelViewMatrix,  // destination matrix
-                modelViewMatrix,  // matrix to rotate
-                this.rotation * 0.7,// amount to rotate in radians
-                [0, 1, 0]);       // axis to rotate around (X)
-
-    {
-      const numComponents = 3;
-      const type = gl.FLOAT;
-      const normalize = false;
-      const stride = 0;
-      const offset = 0;
-      gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.position);
-      gl.vertexAttribPointer(
-          this.programInfo.attribLocations.vertexPosition,
-          numComponents,
-          type,
-          normalize,
-          stride,
-          offset);
-      gl.enableVertexAttribArray(
-          this.programInfo.attribLocations.vertexPosition);
-    }
-
-    {
-      const numComponents = 4;
-      const type = gl.FLOAT;
-      const normalize = false;
-      const stride = 0;
-      const offset = 0;
-      gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.color);
-      gl.vertexAttribPointer(
-          this.programInfo.attribLocations.vertexColor,
-          numComponents,
-          type,
-          normalize,
-          stride,
-          offset);
-      gl.enableVertexAttribArray(
-          this.programInfo.attribLocations.vertexColor);
-    }
-
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indices);
+    gl.clearColor(0.0, 0.0, 0.0, 0.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.useProgram(this.programInfo.program);
 
-    gl.uniformMatrix4fv(
-        this.programInfo.uniformLocations.projectionMatrix,
-        false,
-        projectionMatrix);
-    gl.uniformMatrix4fv(
-        this.programInfo.uniformLocations.modelViewMatrix,
-        false,
-        modelViewMatrix);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
+    gl.enableVertexAttribArray(this.programInfo.attribLocations.position);
+    gl.vertexAttribPointer(
+      this.programInfo.attribLocations.position,
+      2,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
 
-    {
-      const vertexCount = 36;
-      const type = gl.UNSIGNED_SHORT;
-      const offset = 0;
-      gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
+    gl.uniform1f(this.programInfo.uniformLocations.time, time);
+    gl.uniform2f(
+      this.programInfo.uniformLocations.resolution,
+      gl.canvas.width,
+      gl.canvas.height
+    );
+    gl.uniform2f(
+      this.programInfo.uniformLocations.pointer,
+      this.pointer.x,
+      this.pointer.y
+    );
+    gl.uniform1f(this.programInfo.uniformLocations.motionIntensity, this.motionIntensity);
+
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
+  destroy() {
+    if (!this.isReady) {
+      return;
     }
-    
-    // Update rotation for next frame
-    this.rotation += deltaTime;
+
+    const gl = this.gl;
+    gl.deleteBuffer(this.positionBuffer);
+    gl.deleteProgram(this.programInfo.program);
+    this.positionBuffer = null;
+    this.programInfo = null;
   }
 }
