@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = ["About", "Skills", "Projects", "Contact"];
+  const navLinks = ["Proof", "About", "Skills", "Projects", "Contact"];
 
   const handleLinkClick = () => {
     setIsOpen(false);
