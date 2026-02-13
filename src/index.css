@@ -12,8 +12,16 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
   body {
     @apply bg-dark text-slate-200 font-sans antialiased selection:bg-primary selection:text-dark;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
   }
 
   h1,
@@ -24,6 +32,38 @@
   h6 {
     @apply font-mono font-bold tracking-tight;
   }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #00f0ff;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 70;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  background: rgba(10, 10, 10, 0.95);
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  transform: translateY(-200%);
+  transition: transform 200ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
