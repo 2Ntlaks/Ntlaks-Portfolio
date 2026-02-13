@@ -25,6 +25,24 @@ const Contact = () => {
       ),
     },
     {
+      name: "TikTok",
+      url: "https://www.tiktok.com/@ntlakanipho_mgaguli",
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M15.2 3c.3 1.9 1.8 3.4 3.8 3.7v2.2c-1.3 0-2.6-.4-3.7-1.1V14c0 3.4-2.8 6.2-6.2 6.2S3 17.4 3 14s2.8-6.2 6.2-6.2c.3 0 .6 0 .9.1V10c-.3-.1-.6-.1-.9-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V3h2z" />
+        </svg>
+      ),
+    },
+    {
+      name: "YouTube",
+      url: "https://www.youtube.com/@ntlakaniphomgaguli",
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.5 7.2a3 3 0 00-2.1-2.1C19.5 4.6 12 4.6 12 4.6s-7.5 0-9.4.5A3 3 0 00.5 7.2 31.4 31.4 0 000 12a31.4 31.4 0 00.5 4.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31.4 31.4 0 0024 12a31.4 31.4 0 00-.5-4.8zM9.6 15.3V8.7l5.8 3.3-5.8 3.3z" />
+        </svg>
+      ),
+    },
+    {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/ntlakanipho-mgaguli-36a1ab319/",
       icon: (
