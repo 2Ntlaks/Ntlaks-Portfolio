@@ -53,10 +53,23 @@ const Hero = () => {
     rendererRef.current = renderer;
     setWebglReady(true);
 
-    let animationFrameId;
+    let animationFrameId = null;
     const renderLoop = (now) => {
       renderer.render(now);
       animationFrameId = window.requestAnimationFrame(renderLoop);
+    };
+
+    const startRenderLoop = () => {
+      if (animationFrameId === null) {
+        animationFrameId = window.requestAnimationFrame(renderLoop);
+      }
+    };
+
+    const stopRenderLoop = () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
     };
 
     const handlePointerMove = (event) => {
@@ -74,16 +87,26 @@ const Hero = () => {
       renderer.clearPointer();
     };
 
-    animationFrameId = window.requestAnimationFrame(renderLoop);
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-    window.addEventListener("pointerleave", handlePointerLeave);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopRenderLoop();
+      } else {
+        startRenderLoop();
+      }
+    };
+
+    startRenderLoop();
+    canvas.addEventListener("pointermove", handlePointerMove, { passive: true });
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+    canvas.addEventListener("pointerleave", handlePointerLeave);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("pointerleave", handlePointerLeave);
+      stopRenderLoop();
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("pointerleave", handlePointerLeave);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       renderer.destroy();
       rendererRef.current = null;
     };
@@ -158,9 +181,18 @@ const Hero = () => {
             </svg>
             Download CV
           </a>
+          <a
+            href="#contact"
+            className="px-8 py-4 border border-primary/50 text-primary font-medium rounded-lg hover:bg-primary/10 transition-all duration-300 w-full sm:w-auto"
+          >
+            Book Tutoring
+          </a>
         </div>
 
         <p className="text-slate-500 font-mono text-xs mt-6">
+          Open to internships, tutoring, and course collaborations
+        </p>
+        <p className="text-slate-600 font-mono text-xs mt-2">
           Move your pointer to distort the scene
         </p>
       </div>

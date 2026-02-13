@@ -10,7 +10,7 @@ export class WebGLRenderer {
 
     this.gl = canvas.getContext("webgl", {
       alpha: true,
-      antialias: true,
+      antialias: !this.options.isMobile,
       powerPreference: "high-performance",
       premultipliedAlpha: false,
     });

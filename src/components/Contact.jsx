@@ -3,6 +3,29 @@ import React, { useState } from "react";
 const Contact = () => {
   const [copied, setCopied] = useState(false);
   const email = "ntlakaniphomgaguli210@gmail.com";
+  const opportunities = [
+    {
+      title: "Internships & Junior Roles",
+      description:
+        "Hiring for software, graphics, or engineering roles? I am open to internship and entry-level opportunities.",
+      ctaLabel: "Discuss Role",
+      href: `mailto:${email}?subject=Internship%20Opportunity%20-%20Ntlaks.dev`,
+    },
+    {
+      title: "1:1 Tutoring",
+      description:
+        "Need help in WebGL, C, Java, or core engineering modules? Book a focused session with clear outcomes.",
+      ctaLabel: "Book Session",
+      href: `mailto:${email}?subject=Tutoring%20Session%20Request`,
+    },
+    {
+      title: "Course Collaboration",
+      description:
+        "Want to build practical technical courses together? I am open to co-creating and publishing learning content.",
+      ctaLabel: "Start Collaboration",
+      href: `mailto:${email}?subject=Course%20Collaboration%20Inquiry`,
+    },
+  ];
 
   const handleCopyEmail = async () => {
     try {
@@ -64,24 +87,44 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-32 px-6">
-      <div className="max-w-2xl mx-auto text-center">
-        {/* Header */}
-        <span className="text-primary font-mono text-sm uppercase tracking-widest">
-          03. What's Next?
-        </span>
-        <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
-          Let's Connect
-        </h2>
+      <div className="max-w-5xl mx-auto">
+        <div className="max-w-2xl mx-auto text-center mb-14">
+          <span className="text-primary font-mono text-sm uppercase tracking-widest">
+            03. Work With Me
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
+            Let&apos;s Build Something Useful
+          </h2>
+          <p className="text-slate-400 text-lg leading-relaxed">
+            If you are hiring, learning, or collaborating on educational
+            content, here are the fastest ways to connect.
+          </p>
+        </div>
 
-        {/* Description */}
-        <p className="text-slate-400 text-lg leading-relaxed mb-12">
-          Have a project idea? Want to learn WebGL or chat about the future of
-          AI? I'm always open to new conversations and collaborations.
-        </p>
+        <div className="grid gap-4 md:grid-cols-3 mb-12">
+          {opportunities.map((opportunity) => (
+            <article
+              key={opportunity.title}
+              className="rounded-xl border border-white/10 bg-surface/60 p-6 text-left"
+            >
+              <h3 className="text-white text-lg mb-3">{opportunity.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm mb-6">
+                {opportunity.description}
+              </p>
+              <a
+                href={opportunity.href}
+                className="inline-flex items-center gap-2 text-primary text-sm font-mono hover:text-white transition-colors"
+              >
+                {opportunity.ctaLabel}
+                <span aria-hidden="true">-&gt;</span>
+              </a>
+            </article>
+          ))}
+        </div>
 
-        {/* Email - Main CTA */}
-        <div className="mb-12">
+        <div className="mb-12 text-center">
           <button
+            type="button"
             onClick={handleCopyEmail}
             className="group relative inline-flex items-center gap-3 px-4 sm:px-6 py-4 bg-surface/50 border border-white/10 rounded-xl hover:border-primary/50 transition-all duration-300 max-w-full"
           >
@@ -90,6 +133,7 @@ const Contact = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -108,6 +152,7 @@ const Contact = () => {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -122,6 +167,7 @@ const Contact = () => {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -133,19 +179,17 @@ const Contact = () => {
               )}
             </span>
           </button>
-          <p className="text-slate-600 text-xs mt-2 font-mono">
+          <p aria-live="polite" className="text-slate-600 text-xs mt-2 font-mono">
             {copied ? "Copied!" : "Click to copy"}
           </p>
         </div>
 
-        {/* Divider */}
         <div className="flex items-center gap-4 mb-12">
           <div className="flex-1 h-px bg-white/10" />
           <span className="text-slate-600 text-sm">or find me on</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
-        {/* Social Links */}
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-16">
           {socials.map((social) => (
             <a
@@ -161,13 +205,13 @@ const Contact = () => {
           ))}
         </div>
 
-        {/* Location */}
         <p className="text-slate-600 text-sm font-mono flex items-center justify-center gap-2">
           <svg
             className="w-4 h-4"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
