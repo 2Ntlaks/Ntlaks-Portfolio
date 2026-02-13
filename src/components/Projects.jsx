@@ -1,11 +1,14 @@
 import React from "react";
+import { PUBLIC_STATS } from "../constants/publicStats";
 
 const Projects = () => {
+  const { udemyLectures, udemyLearners, udemyPublicReviews } = PUBLIC_STATS;
+
   const projects = [
     {
       title: "WebGL for Beginners",
       description:
-        "A hands-on Udemy course making 3D graphics accessible. 37 lectures covering shapes, 3D objects, textures, and interactive controls. 105+ students enrolled with a 4.5-star rating.",
+        `A hands-on Udemy course making 3D graphics accessible. ${udemyLectures} lectures covering shapes, 3D objects, textures, and interactive controls. ${udemyLearners}+ students enrolled with ${udemyPublicReviews} public reviews.`,
       tech: ["JavaScript", "WebGL", "HTML/CSS"],
       link: "https://www.udemy.com/user/ntlakanipho-mgaguli/",
       github: null,

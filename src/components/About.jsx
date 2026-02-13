@@ -1,7 +1,9 @@
 import React from "react";
 import profilePhoto from "../assets/profile.jpg";
+import { PUBLIC_STATS } from "../constants/publicStats";
 
 const About = () => {
+  const { udemyLearners, udemyPublicReviews } = PUBLIC_STATS;
   const skills = [
     { category: "Languages", items: ["Java", "C", "JavaScript", "SQL"] },
     { category: "Graphics", items: ["WebGL", "3D Graphics", "Shaders"] },
@@ -61,10 +63,11 @@ const About = () => {
             <p>
               That mindset led me to become a{" "}
               <strong className="text-white">WebGL instructor on Udemy</strong>,
-              where I've helped 105+ students from around the world understand
-              3D graphics programming. With a 4.5-star rating, I've proven that
-              complex topics like shaders and rendering pipelines can be taught
-              in a way that actually makes sense. I also work as a{" "}
+              where I've helped {udemyLearners}+ students from around the world
+              understand 3D graphics programming, with {udemyPublicReviews}{" "}
+              public learner reviews on the platform. I've proven that complex
+              topics like shaders and rendering pipelines can be taught in a
+              way that actually makes sense. I also work as a{" "}
               <strong className="text-white">tutor</strong>, guiding students
               through programming and engineering concepts one-on-one.
             </p>
