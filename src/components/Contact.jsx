@@ -216,6 +216,7 @@ const Contact = () => {
                 <input
                   name="name"
                   type="text"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleFormChange}
                   required
@@ -228,6 +229,7 @@ const Contact = () => {
                 <input
                   name="email"
                   type="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleFormChange}
                   required
@@ -241,6 +243,7 @@ const Contact = () => {
               <span className="text-slate-300 text-sm">Topic</span>
               <select
                 name="topic"
+                autoComplete="off"
                 value={formData.topic}
                 onChange={handleFormChange}
                 className="w-full rounded-lg border border-white/10 bg-dark/60 px-4 py-3 text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
@@ -256,6 +259,7 @@ const Contact = () => {
               <span className="text-slate-300 text-sm">Message</span>
               <textarea
                 name="message"
+                autoComplete="off"
                 value={formData.message}
                 onChange={handleFormChange}
                 required
