@@ -5,7 +5,7 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import { applySeo } from "../utils/seo";
 
-const HomePage = () => {
+const Home = () => {
   useEffect(() => {
     applySeo({
       title: "Ntlakanipho Mgaguli | Developer & WebGL Instructor",
@@ -25,4 +25,5 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
+
