@@ -22,6 +22,7 @@ excerpt: "One sentence summary used on the blog list."
 tags:
   - WebGL
   - React
+draft: false
 ---
 ```
 
@@ -30,6 +31,8 @@ Rules:
 - `date`: required string in `YYYY-MM-DD`
 - `excerpt`: required string
 - `tags`: optional string array
+- `draft`: optional boolean (`true` hides post from listing and direct route)
+- Reading time is calculated automatically from MDX content.
 
 ## Post template
 ````mdx
@@ -40,6 +43,7 @@ excerpt: "Short summary for /blog."
 tags:
   - JavaScript
   - Teaching
+draft: false
 ---
 
 # My New Post

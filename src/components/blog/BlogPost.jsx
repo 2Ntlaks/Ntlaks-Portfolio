@@ -4,23 +4,20 @@ import { MDXProvider } from "@mdx-js/react";
 import BlogLayout from "./BlogLayout";
 import { mdxComponents } from "./MDXComponents";
 import { applySeo } from "../../utils/seo";
+import { getPostMetaBySlug, getRelatedPosts } from "./postMeta";
 
 const postImporters = import.meta.glob("../../content/blog/*.mdx");
+const getSlugFromPath = (path) => (path.split("/").pop() || "").replace(/\.mdx$/, "");
 
-const getSlugFromPath = (path) => {
-  const filename = path.split("/").pop() || "";
-  return filename.replace(/\.mdx$/, "");
-};
-
-const postsBySlug = Object.entries(postImporters).reduce((acc, [path, load]) => {
-  const slug = getSlugFromPath(path);
-  acc[slug] = { load };
-
+const postLoadersBySlug = Object.entries(postImporters).reduce((acc, [path, load]) => {
+  acc[getSlugFromPath(path)] = load;
   return acc;
 }, {});
 
 const BlogPost = ({ slug }) => {
-  const postEntry = useMemo(() => postsBySlug[slug], [slug]);
+  const postMeta = useMemo(() => getPostMetaBySlug(slug), [slug]);
+  const postLoader = useMemo(() => postLoadersBySlug[slug], [slug]);
+  const relatedPosts = useMemo(() => getRelatedPosts(slug), [slug]);
   const [status, setStatus] = useState("loading");
   const [PostComponent, setPostComponent] = useState(null);
   const [frontmatter, setFrontmatter] = useState({});
@@ -28,7 +25,7 @@ const BlogPost = ({ slug }) => {
   useEffect(() => {
     let cancelled = false;
 
-    if (!postEntry) {
+    if (!postMeta || postMeta.draft || !postLoader) {
       setStatus("not-found");
       setPostComponent(null);
       setFrontmatter({});
@@ -39,17 +36,20 @@ const BlogPost = ({ slug }) => {
 
     setStatus("loading");
     setPostComponent(null);
-    setFrontmatter({});
+    setFrontmatter({ ...postMeta });
 
-    postEntry
-      .load()
+    postLoader()
       .then((module) => {
         if (cancelled) {
           return;
         }
 
         setPostComponent(() => module.default);
-        setFrontmatter(module.frontmatter || {});
+        setFrontmatter({
+          ...postMeta,
+          ...(module.frontmatter || {}),
+          readingTime: postMeta.readingTime,
+        });
         setStatus("ready");
       })
       .catch((error) => {
@@ -62,7 +62,7 @@ const BlogPost = ({ slug }) => {
     return () => {
       cancelled = true;
     };
-  }, [postEntry]);
+  }, [postLoader, postMeta]);
 
   useEffect(() => {
     if (status === "ready") {
@@ -120,7 +120,7 @@ const BlogPost = ({ slug }) => {
 
   return (
     <MDXProvider components={mdxComponents}>
-      <BlogLayout frontmatter={frontmatter}>
+      <BlogLayout frontmatter={frontmatter} relatedPosts={relatedPosts}>
         <PostComponent />
       </BlogLayout>
     </MDXProvider>
