@@ -14,29 +14,6 @@ const Contact = () => {
   const [formStatus, setFormStatus] = useState("idle");
   const [formError, setFormError] = useState("");
   const email = "ntlakaniphomgaguli210@gmail.com";
-  const opportunities = [
-    {
-      title: "Internships & Junior Roles",
-      description:
-        "Hiring for software, graphics, or engineering roles? I am open to internship and entry-level opportunities.",
-      ctaLabel: "Discuss Role",
-      href: `mailto:${email}?subject=Internship%20Opportunity%20-%20Ntlaks.dev`,
-    },
-    {
-      title: "1:1 Tutoring",
-      description:
-        "Need help in WebGL, C, Java, or core engineering modules? Book a focused session with clear outcomes.",
-      ctaLabel: "Book Session",
-      href: `mailto:${email}?subject=Tutoring%20Session%20Request`,
-    },
-    {
-      title: "Course Collaboration",
-      description:
-        "Want to build practical technical courses together? I am open to co-creating and publishing learning content.",
-      ctaLabel: "Start Collaboration",
-      href: `mailto:${email}?subject=Course%20Collaboration%20Inquiry`,
-    },
-  ];
 
   const handleCopyEmail = async () => {
     try {
@@ -157,27 +134,6 @@ const Contact = () => {
             If you are hiring, learning, or collaborating on educational
             content, here are the fastest ways to connect.
           </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-3 mb-12">
-          {opportunities.map((opportunity) => (
-            <article
-              key={opportunity.title}
-              className="rounded-xl border border-white/10 bg-surface/60 p-6 text-left"
-            >
-              <h3 className="text-white text-lg mb-3">{opportunity.title}</h3>
-              <p className="text-slate-400 leading-relaxed text-sm mb-6">
-                {opportunity.description}
-              </p>
-              <a
-                href={opportunity.href}
-                className="inline-flex items-center gap-2 text-primary text-sm font-mono hover:text-white transition-colors"
-              >
-                {opportunity.ctaLabel}
-                <span aria-hidden="true">-&gt;</span>
-              </a>
-            </article>
-          ))}
         </div>
 
         <div className="rounded-xl border border-white/10 bg-surface/50 p-6 md:p-8 mb-12">
