@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 
 const Contact = () => {
+  const initialFormState = {
+    name: "",
+    email: "",
+    topic: "Internship / Job Opportunity",
+    message: "",
+    "bot-field": "",
+  };
+
   const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
+  const [formStatus, setFormStatus] = useState("idle");
+  const [formError, setFormError] = useState("");
   const email = "ntlakaniphomgaguli210@gmail.com";
   const opportunities = [
     {
@@ -34,6 +45,53 @@ const Contact = () => {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy:", err);
+    }
+  };
+
+  const encodeFormData = (data) =>
+    Object.keys(data)
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(data[key] || "")}`
+      )
+      .join("&");
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    if (formStatus !== "idle") {
+      setFormStatus("idle");
+      setFormError("");
+    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    setFormStatus("idle");
+    setFormError("");
+
+    if (formData["bot-field"]) {
+      setFormStatus("success");
+      return;
+    }
+
+    try {
+      setFormStatus("submitting");
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeFormData({
+          "form-name": "contact",
+          ...formData,
+        }),
+      });
+
+      setFormStatus("success");
+      setFormData(initialFormState);
+    } catch (error) {
+      console.error("Form submission failed:", error);
+      setFormStatus("error");
+      setFormError("Failed to send your message. Please try again.");
     }
   };
 
@@ -120,6 +178,114 @@ const Contact = () => {
               </a>
             </article>
           ))}
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-surface/50 p-6 md:p-8 mb-12">
+          <div className="mb-6">
+            <h3 className="text-white text-2xl mb-2">Send a Message</h3>
+            <p className="text-slate-400 text-sm">
+              This form is powered by Netlify Forms.
+            </p>
+          </div>
+
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleFormSubmit}
+            className="space-y-4"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>
+                Don&apos;t fill this out if you&apos;re human:
+                <input
+                  name="bot-field"
+                  value={formData["bot-field"]}
+                  onChange={handleFormChange}
+                  autoComplete="off"
+                  tabIndex={-1}
+                />
+              </label>
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <label className="space-y-2">
+                <span className="text-slate-300 text-sm">Name</span>
+                <input
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  required
+                  className="w-full rounded-lg border border-white/10 bg-dark/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                  placeholder="Your name"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="text-slate-300 text-sm">Email</span>
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  required
+                  className="w-full rounded-lg border border-white/10 bg-dark/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                  placeholder="you@example.com"
+                />
+              </label>
+            </div>
+
+            <label className="space-y-2 block">
+              <span className="text-slate-300 text-sm">Topic</span>
+              <select
+                name="topic"
+                value={formData.topic}
+                onChange={handleFormChange}
+                className="w-full rounded-lg border border-white/10 bg-dark/60 px-4 py-3 text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              >
+                <option>Internship / Job Opportunity</option>
+                <option>Tutoring Request</option>
+                <option>Course Collaboration</option>
+                <option>General Inquiry</option>
+              </select>
+            </label>
+
+            <label className="space-y-2 block">
+              <span className="text-slate-300 text-sm">Message</span>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleFormChange}
+                required
+                rows={5}
+                className="w-full rounded-lg border border-white/10 bg-dark/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary resize-y"
+                placeholder="Tell me about your project, role, or learning goals."
+              />
+            </label>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                type="submit"
+                disabled={formStatus === "submitting"}
+                className="px-6 py-3 rounded-lg bg-primary/15 border border-primary/60 text-primary hover:bg-primary/25 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {formStatus === "submitting" ? "Sending..." : "Send Message"}
+              </button>
+
+              {formStatus === "success" && (
+                <p className="text-green-400 text-sm" role="status" aria-live="polite">
+                  Thanks. Your message has been sent.
+                </p>
+              )}
+              {formStatus === "error" && (
+                <p className="text-rose-400 text-sm" role="alert">
+                  {formError}
+                </p>
+              )}
+            </div>
+          </form>
         </div>
 
         <div className="mb-12 text-center">
