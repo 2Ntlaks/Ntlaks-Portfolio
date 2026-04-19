@@ -125,7 +125,7 @@ const Contact = () => {
       <div className="max-w-5xl mx-auto">
         <div className="max-w-2xl mx-auto text-center mb-14">
           <span className="text-primary font-mono text-sm uppercase tracking-widest">
-            03. Work With Me
+            04. Work With Me
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
             Let&apos;s Build Something Useful

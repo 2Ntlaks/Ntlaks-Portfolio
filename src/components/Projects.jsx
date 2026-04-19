@@ -37,7 +37,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-24 px-6 max-w-7xl mx-auto">
       <h2 className="text-3xl md:text-4xl font-mono font-bold text-white mb-12">
-        <span className="text-primary">02.</span> Featured Projects
+        <span className="text-primary">03.</span> Featured Projects
       </h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

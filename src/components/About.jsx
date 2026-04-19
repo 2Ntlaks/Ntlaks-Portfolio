@@ -3,7 +3,13 @@ import profilePhoto from "../assets/profile.jpg";
 import { PUBLIC_STATS } from "../constants/publicStats";
 
 const About = () => {
-  const { udemyLearners, udemyPublicReviews } = PUBLIC_STATS;
+  const { udemyLearners, udemyPublicReviews, udemyLectures } = PUBLIC_STATS;
+
+  const stats = [
+    { value: `${udemyLearners}+`, label: "Learners taught" },
+    { value: udemyLectures, label: "Course lectures" },
+    { value: udemyPublicReviews, label: "Public reviews" },
+  ];
 
   const skills = [
     { category: "Languages", items: ["Java", "C", "JavaScript", "SQL"] },
@@ -76,23 +82,27 @@ const About = () => {
 
           <div className="space-y-4 text-slate-400 leading-relaxed max-w-2xl">
             <p>
-              I'm a final-year Computer Engineering student at{" "}
+              Final-year Computer Engineering student at{" "}
               <strong className="text-white">
                 Cape Peninsula University of Technology
-              </strong>{" "}
-              in Cape Town, building across both hardware and software with a
-              practical, project-first approach.
-            </p>
-            <p>
-              I teach WebGL on Udemy, where I have supported{" "}
-              <strong className="text-white">{udemyLearners}+ learners</strong>{" "}
-              and earned{" "}
-              <strong className="text-white">
-                {udemyPublicReviews} public reviews
               </strong>
-              . I also tutor students directly in C, Java, and core engineering
-              fundamentals.
+              , building across hardware and software with a project-first
+              approach. I teach WebGL on Udemy and tutor students directly in
+              C, Java, and core engineering fundamentals.
             </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 max-w-2xl pt-2">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center lg:text-left">
+                <p className="text-2xl md:text-3xl font-mono font-bold text-primary">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
 
           <blockquote className="border-l-2 border-primary pl-4 py-2 mt-2">
@@ -186,14 +196,14 @@ const About = () => {
         </div>
       </div>
 
-      <div id="skills">
+      <div id="skills" className="scroll-mt-24">
         <div className="text-center mb-10">
-          <span className="text-primary font-mono text-sm uppercase tracking-widest">
-            Technical Arsenal
-          </span>
-          <h3 className="text-xl md:text-2xl font-bold text-white mt-2">
-            Tools & Technologies
+          <h3 className="text-3xl md:text-4xl font-mono font-bold text-white">
+            <span className="text-primary">02.</span> Skills
           </h3>
+          <p className="text-slate-500 font-mono text-sm uppercase tracking-widest mt-3">
+            Tools & Technologies
+          </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

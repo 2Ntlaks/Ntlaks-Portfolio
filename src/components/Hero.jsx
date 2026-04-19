@@ -36,7 +36,7 @@ const Hero = () => {
     let renderer;
     try {
       renderer = new WebGLRenderer(canvas, {
-        reducedMotion: false,
+        reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
         isMobile: window.matchMedia("(max-width: 768px)").matches,
       });
     } catch (error) {
@@ -134,65 +134,37 @@ const Hero = () => {
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <p className="text-primary font-mono text-xs sm:text-sm mb-5 tracking-wide uppercase">
-          Interactive WebGL Scene
+          Ntlakanipho Mgaguli
         </p>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
-          Ntlakanipho
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+          I build interactive 3D
           <span className="text-primary">.</span>
+          <br className="hidden sm:block" />
+          <span className="text-slate-300">And teach how it works.</span>
         </h1>
 
-        <p className="text-slate-300 text-lg sm:text-xl md:text-2xl mb-10 font-light">
-          Computer Engineering Student{" "}
-          <span aria-hidden="true" className="text-slate-500">
-            &bull;
-          </span>{" "}
-          WebGL Instructor{" "}
-          <span aria-hidden="true" className="text-slate-500">
-            &bull;
-          </span>{" "}
-          Tutor
+        <p className="text-slate-400 text-base sm:text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
+          Computer Engineering student in Cape Town. WebGL instructor on Udemy.
+          Tutor in C, Java, and graphics fundamentals.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#projects"
-            className="px-8 py-4 bg-white text-dark font-semibold rounded-lg hover:bg-slate-100 transition-all duration-300 w-full sm:w-auto"
+            className="px-8 py-4 bg-primary text-dark font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 w-full sm:w-auto"
           >
             View Projects
           </a>
           <a
-            href="/NTLAKS RESUME 2025.pdf"
-            download
-            className="px-8 py-4 border border-white/30 text-white font-medium rounded-lg hover:bg-white/10 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            Download CV
-          </a>
-          <a
             href="#contact"
-            className="px-8 py-4 border border-primary/50 text-primary font-medium rounded-lg hover:bg-primary/10 transition-all duration-300 w-full sm:w-auto"
+            className="px-6 py-4 text-slate-300 font-mono text-sm hover:text-primary transition-colors duration-300 w-full sm:w-auto"
           >
-            Book Tutoring
+            Get in touch &rarr;
           </a>
         </div>
 
-        <p className="text-slate-500 font-mono text-xs mt-6">
-          Open to internships, tutoring, and course collaborations
-        </p>
-        <p className="text-slate-600 font-mono text-xs mt-2">
+        <p className="text-slate-600 font-mono text-xs mt-8">
           Move your pointer to distort the scene
         </p>
       </div>

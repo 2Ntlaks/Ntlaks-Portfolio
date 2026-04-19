@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { label: "About", sectionId: "about" },
@@ -12,7 +14,7 @@ const Navbar = () => {
     { label: "Contact", sectionId: "contact" },
   ];
 
-  const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  const currentPath = location.pathname.replace(/\/+$/, "") || "/";
   const isHomePath = currentPath === "/";
 
   useEffect(() => {
