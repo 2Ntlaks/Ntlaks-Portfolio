@@ -15,15 +15,6 @@ const Projects = () => {
       type: "Course",
     },
     {
-      title: "isiXhosa AI Chatbot",
-      description:
-        "A 12.2M-parameter decoder-only transformer trained from scratch on 11.5M isiXhosa tokens. Custom BPE tokenizer that learned morphological structure unsupervised, generating grammatically plausible text for a low-resource Bantu language.",
-      tech: ["Python", "PyTorch", "Transformers"],
-      link: "https://github.com/2Ntlaks/ai-xhosa-chatbot",
-      github: "https://github.com/2Ntlaks/ai-xhosa-chatbot",
-      type: "AI / ML",
-    },
-    {
       title: "WebGL NDC Visualizer",
       description:
         "An interactive teaching tool for WebGL's Normalized Device Coordinate space. Click-to-place vertices, live preview across all 7 primitive types, and auto-generated copyable shader code.",

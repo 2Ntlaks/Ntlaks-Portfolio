@@ -12,7 +12,6 @@ import {
   SiGit,
   SiGithub,
   SiMysql,
-  SiPytorch,
 } from "react-icons/si";
 
 const skillGroups = [
@@ -36,12 +35,11 @@ const skillGroups = [
     ],
   },
   {
-    category: "Tools & ML",
+    category: "Tools",
     items: [
       { name: "Git", Icon: SiGit, color: "#F05032" },
       { name: "GitHub", Icon: SiGithub, color: "#F8FAFC" },
       { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
-      { name: "PyTorch", Icon: SiPytorch, color: "#EE4C2C" },
     ],
   },
 ];
