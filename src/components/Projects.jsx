@@ -15,22 +15,49 @@ const Projects = () => {
       type: "Course",
     },
     {
+      title: "isiXhosa AI Chatbot",
+      description:
+        "A 12.2M-parameter decoder-only transformer trained from scratch on 11.5M isiXhosa tokens. Custom BPE tokenizer that learned morphological structure unsupervised, generating grammatically plausible text for a low-resource Bantu language.",
+      tech: ["Python", "PyTorch", "Transformers"],
+      link: "https://github.com/2Ntlaks/ai-xhosa-chatbot",
+      github: "https://github.com/2Ntlaks/ai-xhosa-chatbot",
+      type: "AI / ML",
+    },
+    {
+      title: "MiniOS Kernel",
+      description:
+        "A modular mini OS kernel with a two-stage bootloader, virtual memory management, round-robin preemptive scheduler, virtual file system, and full GDT/IDT interrupt handling. Tested under QEMU with unit tests for memory and FS layers.",
+      tech: ["C", "Assembly", "QEMU"],
+      link: "https://github.com/2Ntlaks/MiniOS-Kernel",
+      github: "https://github.com/2Ntlaks/MiniOS-Kernel",
+      type: "Systems",
+    },
+    {
+      title: "WebGL NDC Visualizer",
+      description:
+        "An interactive teaching tool for WebGL's Normalized Device Coordinate space. Click-to-place vertices, live preview across all 7 primitive types, and auto-generated copyable shader code.",
+      tech: ["React", "Vite", "WebGL"],
+      link: "https://github.com/2Ntlaks/WebGL-NDC-Visualizer",
+      github: "https://github.com/2Ntlaks/WebGL-NDC-Visualizer",
+      type: "Teaching Tool",
+    },
+    {
       title: "Full-Stack Banking System",
       description:
-        "A secure banking application with full CRUD functionality. Features custom security implementation, user management, and transaction history.",
+        "A secure banking application with full CRUD functionality. Features custom security implementation, user management, and transaction history backed by MySQL.",
       tech: ["Java", "MySQL", "Security"],
       link: "https://github.com/2Ntlaks/Bank-Management-System",
       github: "https://github.com/2Ntlaks/Bank-Management-System",
-      type: "Application",
+      type: "Full-Stack",
     },
     {
-      title: "RLC Circuit Calculator",
+      title: "Car in WebGL",
       description:
-        "A suite of practical calculation tools for engineering applications. Automates complex computations with accurate mathematical algorithms.",
-      tech: ["C", "Java", "Algorithms"],
-      link: "https://github.com/2Ntlaks/RLC-CIRCUIT-CALCULATOR",
-      github: "https://github.com/2Ntlaks/RLC-CIRCUIT-CALCULATOR",
-      type: "Tooling",
+        "A raw-WebGL 2D car built without frameworks or libraries. Two progressive versions walk through triangulating shapes, driving vertex/fragment shaders, and animating with transformation matrices.",
+      tech: ["JavaScript", "WebGL", "GLSL"],
+      link: "https://github.com/2Ntlaks/Car-in-WebGL",
+      github: "https://github.com/2Ntlaks/Car-in-WebGL",
+      type: "Graphics",
     },
   ];
 

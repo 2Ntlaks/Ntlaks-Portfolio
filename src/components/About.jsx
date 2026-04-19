@@ -11,13 +11,6 @@ const About = () => {
     { value: udemyPublicReviews, label: "Public reviews" },
   ];
 
-  const skills = [
-    { category: "Languages", items: ["Java", "C", "JavaScript", "SQL"] },
-    { category: "Graphics", items: ["WebGL", "3D Graphics", "Shaders"] },
-    { category: "Web", items: ["React", "Vite", "HTML/CSS"] },
-    { category: "Tools", items: ["Git", "GitHub", "MySQL"] },
-  ];
-
   const whatIDo = [
     {
       title: "Build",
@@ -131,7 +124,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="mb-20">
+      <div>
         <div className="bg-gradient-to-br from-surface/80 to-surface/40 rounded-2xl border border-white/5 p-8 md:p-10 backdrop-blur-sm">
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             <div className="flex-1 space-y-4">
@@ -196,40 +189,6 @@ const About = () => {
         </div>
       </div>
 
-      <div id="skills" className="scroll-mt-24">
-        <div className="text-center mb-10">
-          <h3 className="text-3xl md:text-4xl font-mono font-bold text-white">
-            <span className="text-primary">02.</span> Skills
-          </h3>
-          <p className="text-slate-500 font-mono text-sm uppercase tracking-widest mt-3">
-            Tools & Technologies
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {skills.map((skillGroup) => (
-            <div
-              key={skillGroup.category}
-              className="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-primary/20 transition-colors duration-300"
-            >
-              <h4 className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">
-                {skillGroup.category}
-              </h4>
-              <ul className="space-y-2">
-                {skillGroup.items.map((skill) => (
-                  <li
-                    key={skill}
-                    className="text-slate-300 font-mono text-sm flex items-center gap-2"
-                  >
-                    <span className="w-1 h-1 bg-primary rounded-full" />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
