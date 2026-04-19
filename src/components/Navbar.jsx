@@ -131,12 +131,6 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/blog"
-            className={menuLinkBaseClass}
-          >
-            Blog
-          </a>
-          <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
             rel="noopener noreferrer"
@@ -205,13 +199,6 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <a
-            href="/blog"
-            onClick={handleLinkClick}
-            className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-          >
-            Blog
-          </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"

@@ -15,12 +15,6 @@ const Footer = () => {
 
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           <a
-            href="/blog"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Blog
-          </a>
-          <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
             rel="noopener noreferrer"

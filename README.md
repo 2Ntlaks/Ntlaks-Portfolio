@@ -8,7 +8,6 @@ Portfolio website for **Ntlakanipho Mgaguli**: Computer Engineering student, Web
 
 ## Features
 - Interactive WebGL hero experience.
-- MDX-powered in-site blog (`/blog`, `/blog/:slug`).
 - Responsive design with accessibility improvements.
 - SEO metadata and structured data.
 - Netlify Forms contact form with spam honeypot.
@@ -18,8 +17,6 @@ Portfolio website for **Ntlakanipho Mgaguli**: Computer Engineering student, Web
 - Vite 7
 - Tailwind CSS 4
 - React Router
-- MDX (`@mdx-js/rollup`, `@mdx-js/react`)
-- Rehype Pretty Code + Shiki
 - Netlify deployment
 
 ## Quick Start
@@ -28,39 +25,6 @@ npm install
 npm run dev
 npm run build
 npm run preview
-```
-
-## Routes
-- `/` portfolio home
-- `/blog` blog listing
-- `/blog/:slug` MDX blog post
-
-## MDX Blog
-Blog posts live in `src/content/blog/*.mdx` and are loaded using `import.meta.glob`.
-
-Read the full authoring guide:
-- `docs/BLOG_AUTHORING.md`
-
-## Project Structure
-```txt
-src/
-  components/
-    blog/
-      BlogLayout.jsx
-      BlogList.jsx
-      BlogPost.jsx
-      MDXComponents.jsx
-  content/
-    blog/
-      hello-world.mdx
-  pages/
-    Home.jsx
-    Blog.jsx
-    BlogPostPage.jsx
-    NotFoundPage.jsx
-  webgl/
-  types/
-    mdx.d.ts
 ```
 
 ## Links
