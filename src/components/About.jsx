@@ -15,7 +15,7 @@ const About = () => {
     { category: "Languages", items: ["Java", "C", "JavaScript", "SQL"] },
     { category: "Graphics", items: ["WebGL", "3D Graphics", "Shaders"] },
     { category: "Web", items: ["React", "Vite", "HTML/CSS"] },
-    { category: "Tools", items: ["Git", "GitHub", "MySQL", "VS Code"] },
+    { category: "Tools", items: ["Git", "GitHub", "MySQL"] },
   ];
 
   const whatIDo = [

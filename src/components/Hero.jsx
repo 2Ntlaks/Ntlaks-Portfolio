@@ -164,7 +164,7 @@ const Hero = () => {
           </a>
         </div>
 
-        <p className="text-slate-600 font-mono text-xs mt-8">
+        <p className="hidden [@media(pointer:fine)]:block text-slate-600 font-mono text-xs mt-8">
           Move your pointer to distort the scene
         </p>
       </div>

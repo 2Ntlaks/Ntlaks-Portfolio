@@ -13,12 +13,20 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           <a
             href="/blog"
             className="text-slate-400 hover:text-white transition-colors"
           >
             Blog
+          </a>
+          <a
+            href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            Udemy
           </a>
           <a
             href="https://github.com/2Ntlaks"
@@ -41,6 +49,13 @@ const Footer = () => {
             className="text-slate-400 hover:text-white transition-colors"
           >
             Email
+          </a>
+          <a
+            href="/ntlaks-resume-2025.pdf"
+            download
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            CV
           </a>
         </div>
 
