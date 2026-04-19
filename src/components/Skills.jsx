@@ -1,5 +1,5 @@
 import React from "react";
-import { FaJava, FaMicrochip } from "react-icons/fa6";
+import { FaJava } from "react-icons/fa6";
 import {
   SiC,
   SiJavascript,
@@ -21,7 +21,6 @@ const skillGroups = [
     items: [
       { name: "Java", Icon: FaJava, color: "#E76F00" },
       { name: "C", Icon: SiC, color: "#A8B9CC" },
-      { name: "Assembly", Icon: FaMicrochip, color: "#94A3B8" },
       { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
       { name: "Python", Icon: SiPython, color: "#3776AB" },
     ],

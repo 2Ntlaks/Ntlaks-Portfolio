@@ -24,15 +24,6 @@ const Projects = () => {
       type: "AI / ML",
     },
     {
-      title: "MiniOS Kernel",
-      description:
-        "A modular mini OS kernel with a two-stage bootloader, virtual memory management, round-robin preemptive scheduler, virtual file system, and full GDT/IDT interrupt handling. Tested under QEMU with unit tests for memory and FS layers.",
-      tech: ["C", "Assembly", "QEMU"],
-      link: "https://github.com/2Ntlaks/MiniOS-Kernel",
-      github: "https://github.com/2Ntlaks/MiniOS-Kernel",
-      type: "Systems",
-    },
-    {
       title: "WebGL NDC Visualizer",
       description:
         "An interactive teaching tool for WebGL's Normalized Device Coordinate space. Click-to-place vertices, live preview across all 7 primitive types, and auto-generated copyable shader code.",
