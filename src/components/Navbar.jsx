@@ -130,6 +130,11 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
+          {/* Served by the Netlify /writing proxy, not this SPA: must stay a
+              plain full-page link, never a router Link. */}
+          <a href="/writing" className={menuLinkBaseClass}>
+            Writing
+          </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
@@ -199,6 +204,13 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
+          <a
+            href="/writing"
+            onClick={handleLinkClick}
+            className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+          >
+            Writing
+          </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
