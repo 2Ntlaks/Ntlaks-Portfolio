@@ -1,1 +1,9 @@
+# Writing/blog lives in its own repo (2Ntlaks/-ntlaks-writing) deployed as
+# the Netlify site "ntlaks-writing"; these proxy rules serve it under this
+# domain. They MUST stay above the SPA catch-all, which would otherwise
+# swallow them (Netlify uses first-match).
+/writing/* https://ntlaks-writing.netlify.app/writing/:splat 200
+/writing   https://ntlaks-writing.netlify.app/writing/     200
+
+# SPA fallback for the React Router portfolio.
 /* /index.html 200
