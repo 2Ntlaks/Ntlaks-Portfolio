@@ -1,194 +1,161 @@
 import React from "react";
 import profilePhoto from "../assets/profile.jpg";
 import { PUBLIC_STATS } from "../constants/publicStats";
+import SectionHeading from "./SectionHeading";
 
 const About = () => {
-  const { udemyLearners, udemyPublicReviews, udemyLectures } = PUBLIC_STATS;
+  const { udemyLearners, udemyCountries, udemyLectures } = PUBLIC_STATS;
 
   const stats = [
-    { value: `${udemyLearners}+`, label: "Learners taught" },
+    { value: `${udemyLearners}+`, label: "Students taught" },
+    { value: `${udemyCountries}+`, label: "Countries reached" },
     { value: udemyLectures, label: "Course lectures" },
-    { value: udemyPublicReviews, label: "Public reviews" },
   ];
 
-  const whatIDo = [
+  const practice = [
     {
+      index: "a",
       title: "Build",
       detail:
-        "I build practical software and engineering tools that solve real student and developer problems.",
+        "Practical software and engineering tools that solve real student and developer problems — from banking systems in Java to raw-WebGL teaching demos.",
     },
     {
+      index: "b",
       title: "Teach",
       detail:
-        "I simplify complex topics like WebGL and systems concepts into step-by-step lessons that people can apply immediately.",
+        "Complex topics like WebGL and systems concepts, broken into step-by-step lessons that students across 40+ countries apply immediately.",
     },
     {
+      index: "c",
       title: "Tutor",
       detail:
-        "I mentor students one-on-one in programming and engineering with a focus on clear understanding and results.",
+        "One-on-one mentoring in C, Java, and engineering fundamentals through Mgaguli Tutoring, focused on clear understanding and results.",
     },
   ];
 
-  const creatorLinks = [
-    { name: "TikTok", url: "https://www.tiktok.com/@ntlakanipho_mgaguli" },
+  const learnLinks = [
+    { name: "Mgaguli Tutoring", url: "https://mgagulitutoring.dev" },
+    { name: "Udemy", url: "https://www.udemy.com/user/ntlakanipho-mgaguli/" },
     { name: "YouTube", url: "https://www.youtube.com/@ntlakaniphomgaguli" },
-    { name: "GitHub", url: "https://github.com/2Ntlaks" },
-    {
-      name: "MySQL Cheat Sheet",
-      url: "https://www.scribd.com/document/706758050/MySQL-Cheat-Sheet",
-    },
-  ];
-
-  const aiLabs = [
-    { name: "Anthropic", url: "https://anthropic.com" },
-    { name: "OpenAI", url: "https://openai.com" },
-    { name: "xAI", url: "https://x.ai" },
+    { name: "TikTok", url: "https://www.tiktok.com/@ntlakanipho_mgaguli" },
   ];
 
   return (
-    <section id="about" className="py-24 px-6 max-w-6xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-mono font-bold text-white mb-16 text-center">
-        <span className="text-primary">01.</span> About Me
-      </h2>
+    <section id="about" className="relative py-28 px-6">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading fig="01" title="About" note="Subject profile" />
 
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center lg:items-start mb-16">
-        <div className="flex-shrink-0">
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-            <img
-              src={profilePhoto}
-              alt="Ntlakanipho Mgaguli"
-              className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-2xl object-cover border border-white/10 shadow-2xl"
-            />
-          </div>
-        </div>
+        <div className="grid lg:grid-cols-[auto_1fr] gap-12 lg:gap-16 items-start mb-20">
+          <figure className="mx-auto lg:mx-0">
+            <div className="corners border border-line bg-panel p-3">
+              <img
+                src={profilePhoto}
+                alt="Ntlakanipho Mgaguli"
+                className="w-56 h-56 lg:w-64 lg:h-64 object-cover"
+              />
+            </div>
+            <figcaption className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-faint mt-3 text-center lg:text-left">
+              Subject — N. Mgaguli, CPUT
+            </figcaption>
+          </figure>
 
-        <div className="space-y-6 text-center lg:text-left">
-          <div>
-            <span className="text-primary font-mono text-sm uppercase tracking-widest">
-              The Journey
-            </span>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mt-2">
-              Student, Builder, Educator
+          <div className="space-y-8 text-center lg:text-left">
+            <h3 className="font-display font-semibold text-2xl md:text-3xl text-paper">
+              Student. Builder. Educator.
             </h3>
-          </div>
 
-          <div className="space-y-4 text-slate-400 leading-relaxed max-w-2xl">
-            <p>
-              Final-year Computer Engineering student at{" "}
-              <strong className="text-white">
+            <p className="text-draft leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              I&apos;m a final-year Computer Engineering student at{" "}
+              <strong className="text-paper font-medium">
                 Cape Peninsula University of Technology
               </strong>
               , building across hardware and software with a project-first
-              approach. I teach WebGL on Udemy and tutor students directly in
-              C, Java, and core engineering fundamentals.
+              approach. On Udemy I teach WebGL to {udemyLearners}+ students
+              from over {udemyCountries} countries, and through Mgaguli
+              Tutoring I mentor students directly in C, Java, and core
+              engineering fundamentals.
             </p>
-          </div>
 
-          <div className="grid grid-cols-3 gap-4 max-w-2xl pt-2">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center lg:text-left">
-                <p className="text-2xl md:text-3xl font-mono font-bold text-primary">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-3 sm:inline-flex sm:items-stretch divide-x divide-line border border-line bg-panel/60 w-full sm:w-auto">
+              {stats.map((stat) => (
+                <div key={stat.label} className="px-2 sm:px-7 py-4 text-center sm:text-left">
+                  <p className="font-display font-semibold text-2xl md:text-3xl text-amber">
+                    {stat.value}
+                  </p>
+                  <p className="font-mono text-[0.6rem] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-faint mt-1">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-          <blockquote className="border-l-2 border-primary pl-4 py-2 mt-2">
-            <p className="text-lg font-mono text-white italic">
-              "Learn deeply. Build practically. Teach clearly."
-            </p>
-          </blockquote>
+            <blockquote className="border-l-2 border-amber pl-5 py-1 max-w-2xl mx-auto lg:mx-0 text-left">
+              <p className="font-display text-xl text-paper italic">
+                &ldquo;Learn deeply. Build practically. Teach clearly.&rdquo;
+              </p>
+            </blockquote>
+          </div>
         </div>
-      </div>
 
-      <div className="mb-16">
-        <div className="grid md:grid-cols-3 gap-4">
-          {whatIDo.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl border border-white/10 bg-surface/60 p-5 text-left"
-            >
-              <p className="text-primary font-mono text-xs uppercase tracking-widest mb-2">
+        <div className="grid md:grid-cols-3 gap-px bg-line border border-line mb-20">
+          {practice.map((item) => (
+            <div key={item.title} className="bg-panel p-7">
+              <p className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint mb-3">
+                01.{item.index}
+              </p>
+              <h4 className="font-display font-semibold text-xl text-paper mb-3">
                 {item.title}
-              </p>
-              <p className="text-slate-300 leading-relaxed text-sm">
-                {item.detail}
-              </p>
+              </h4>
+              <p className="text-draft text-sm leading-relaxed">{item.detail}</p>
             </div>
           ))}
         </div>
-      </div>
 
-      <div>
-        <div className="bg-gradient-to-br from-surface/80 to-surface/40 rounded-2xl border border-white/5 p-8 md:p-10 backdrop-blur-sm">
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
+        <div className="corners border border-line bg-panel/70 p-8 md:p-10">
+          <div className="flex flex-col md:flex-row md:items-start gap-10">
             <div className="flex-1 space-y-4">
-              <div>
-                <span className="text-secondary font-mono text-sm uppercase tracking-widest">
-                  Current Focus
-                </span>
-                <h3 className="text-xl md:text-2xl font-bold text-white mt-2">
-                  AI, Cloud, and Better Learning Systems
-                </h3>
-              </div>
-              <p className="text-slate-400 leading-relaxed">
-                I see <strong className="text-white">AI as an amplifier</strong>
-                : not a replacement, but a way to multiply strong fundamentals.
-                I am currently expanding into AWS cloud services while designing
-                the foundation for a future tutoring platform that will host
-                practical, project-driven technical courses.
+              <p className="font-mono text-xs tracking-[0.25em] uppercase text-amber">
+                Current focus
               </p>
-              <p className="text-slate-500 text-sm">
-                Following research and updates from:
+              <h3 className="font-display font-semibold text-xl md:text-2xl text-paper">
+                AI, cloud, and better learning systems
+              </h3>
+              <p className="text-draft leading-relaxed">
+                I see <strong className="text-paper font-medium">AI as an amplifier</strong>{" "}
+                — not a replacement, but a way to multiply strong fundamentals.
+                I&apos;m currently expanding into AWS cloud services while
+                growing Mgaguli Tutoring into a home for practical,
+                project-driven technical courses.
               </p>
-              <div className="flex flex-wrap gap-3">
-                {aiLabs.map((lab) => (
-                  <a
-                    key={lab.name}
-                    href={lab.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300 font-mono text-sm hover:border-primary/50 hover:text-primary transition-all duration-300"
-                  >
-                    {lab.name}
-                  </a>
-                ))}
-              </div>
             </div>
 
-            <div className="flex-shrink-0 md:max-w-xs w-full">
-              <p className="text-xs text-slate-500 uppercase tracking-widest mb-4 font-mono">
-                Learn With Me
+            <div className="md:max-w-xs w-full">
+              <p className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint mb-4">
+                Learn with me
               </p>
-              <div className="grid grid-cols-2 gap-3">
-                {creatorLinks.map((link) => (
+              <div className="grid grid-cols-2 gap-2">
+                {learnLinks.map((link) => (
                   <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs text-center hover:border-primary/40 hover:text-primary transition-all duration-300"
+                    className="px-3 py-2.5 border border-line text-draft font-mono text-xs text-center hover:border-amber/60 hover:text-amber transition-colors duration-300"
                   >
                     {link.name}
                   </a>
                 ))}
               </div>
               <a
-                href="/#contact"
-                className="mt-5 inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border border-primary/40 text-primary text-sm font-mono hover:bg-primary/10 transition-colors"
+                href="mailto:ntlakaniphomgaguli210@gmail.com"
+                className="mt-4 inline-flex items-center justify-center w-full px-4 py-3 border border-amber/60 text-amber font-mono text-xs tracking-[0.15em] uppercase hover:bg-amber hover:text-ink transition-colors"
               >
-                Open to internships and tutoring
+                Open to internships &amp; tutoring
               </a>
             </div>
           </div>
         </div>
       </div>
-
     </section>
   );
 };

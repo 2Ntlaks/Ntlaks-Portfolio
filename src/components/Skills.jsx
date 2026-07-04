@@ -13,76 +13,64 @@ import {
   SiGithub,
   SiMysql,
 } from "react-icons/si";
+import SectionHeading from "./SectionHeading";
 
-const skillGroups = [
-  {
-    category: "Languages",
-    items: [
-      { name: "Java", Icon: FaJava, color: "#E76F00" },
-      { name: "C", Icon: SiC, color: "#A8B9CC" },
-      { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
-      { name: "Python", Icon: SiPython, color: "#3776AB" },
-    ],
-  },
-  {
-    category: "Web & Graphics",
-    items: [
-      { name: "WebGL", Icon: SiWebgl, color: "#990000" },
-      { name: "React", Icon: SiReact, color: "#61DAFB" },
-      { name: "Vite", Icon: SiVite, color: "#646CFF" },
-      { name: "Tailwind", Icon: SiTailwindcss, color: "#38BDF8" },
-      { name: "HTML5", Icon: SiHtml5, color: "#E34F26" },
-    ],
-  },
-  {
-    category: "Tools",
-    items: [
-      { name: "Git", Icon: SiGit, color: "#F05032" },
-      { name: "GitHub", Icon: SiGithub, color: "#F8FAFC" },
-      { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
-    ],
-  },
+/* Rendered as a spec-sheet "bill of materials" rather than an icon grid. */
+const skills = [
+  { name: "Java", category: "Language", note: "Backend & desktop apps", Icon: FaJava },
+  { name: "C", category: "Language", note: "Systems & embedded", Icon: SiC },
+  { name: "JavaScript", category: "Language", note: "Web & graphics", Icon: SiJavascript },
+  { name: "Python", category: "Language", note: "Scripting & tooling", Icon: SiPython },
+  { name: "WebGL", category: "Graphics", note: "Shaders, raw GL — I teach this", Icon: SiWebgl },
+  { name: "React", category: "Web", note: "This site, teaching tools", Icon: SiReact },
+  { name: "Vite", category: "Web", note: "Build tooling", Icon: SiVite },
+  { name: "Tailwind", category: "Web", note: "Styling systems", Icon: SiTailwindcss },
+  { name: "HTML5", category: "Web", note: "Semantic markup", Icon: SiHtml5 },
+  { name: "MySQL", category: "Data", note: "Relational modelling", Icon: SiMysql },
+  { name: "Git", category: "Tooling", note: "Version control", Icon: SiGit },
+  { name: "GitHub", category: "Tooling", note: "Collaboration & CI", Icon: SiGithub },
 ];
 
 const Skills = () => (
-  <section
-    id="skills"
-    className="scroll-mt-24 py-24 px-6 max-w-6xl mx-auto"
-  >
-    <div className="text-center mb-14">
-      <h2 className="text-3xl md:text-4xl font-mono font-bold text-white">
-        <span className="text-primary">02.</span> Skills
-      </h2>
-      <p className="text-slate-500 font-mono text-sm uppercase tracking-widest mt-3">
-        Technical Arsenal
-      </p>
-    </div>
+  <section id="skills" className="relative py-28 px-6">
+    <div className="max-w-6xl mx-auto">
+      <SectionHeading fig="02" title="Skills" note="Bill of materials" />
 
-    <div className="space-y-10">
-      {skillGroups.map((group) => (
-        <div key={group.category}>
-          <h3 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-4 text-center md:text-left">
-            {group.category}
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-            {group.items.map(({ name, Icon, color }) => (
-              <div
-                key={name}
-                className="group flex flex-col items-center justify-center gap-3 p-5 rounded-xl bg-surface/60 border border-white/5 hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <Icon
-                  className="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
-                  style={{ color }}
-                  aria-hidden="true"
-                />
-                <span className="text-slate-300 font-mono text-sm">
-                  {name}
-                </span>
-              </div>
-            ))}
-          </div>
+      <div className="corners border border-line bg-panel/50">
+        <div className="hidden sm:grid grid-cols-[3rem_2.5rem_1fr_8rem_1fr] gap-4 items-center px-6 py-3 border-b border-line font-mono text-[0.6rem] tracking-[0.25em] uppercase text-faint">
+          <span>No.</span>
+          <span aria-hidden="true" />
+          <span>Item</span>
+          <span>Class</span>
+          <span className="text-right">Notes</span>
         </div>
-      ))}
+
+        <ul>
+          {skills.map(({ name, category, note, Icon }, index) => (
+            <li
+              key={name}
+              className="group grid grid-cols-[2.5rem_2rem_1fr] sm:grid-cols-[3rem_2.5rem_1fr_8rem_1fr] gap-4 items-center px-6 py-4 border-b border-line/50 last:border-b-0 hover:bg-panel transition-colors duration-200"
+            >
+              <span className="font-mono text-xs text-faint">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <Icon
+                className="w-5 h-5 text-draft group-hover:text-amber transition-colors duration-200"
+                aria-hidden="true"
+              />
+              <span className="font-display font-medium text-lg text-paper">
+                {name}
+              </span>
+              <span className="hidden sm:block font-mono text-xs text-faint uppercase tracking-wider">
+                {category}
+              </span>
+              <span className="hidden sm:block text-draft text-sm text-right">
+                {note}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 );

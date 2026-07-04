@@ -104,19 +104,19 @@ const Navbar = () => {
   };
 
   const menuLinkBaseClass =
-    "text-sm font-mono text-slate-400 hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 rounded";
+    "font-mono text-xs tracking-[0.18em] uppercase text-draft hover:text-amber transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2";
 
   return (
     <nav
       aria-label="Primary"
-      className="fixed top-0 left-0 w-full z-50 bg-dark/80 backdrop-blur-md border-b border-white/10"
+      className="fixed top-0 left-0 w-full z-50 bg-ink/85 backdrop-blur-md border-b border-line"
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         <a
           href="/"
-          className="text-2xl font-mono font-bold text-white tracking-tighter focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 rounded"
+          className="font-display font-bold text-2xl text-paper tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
         >
-          NTLAKS<span className="text-primary">.DEV</span>
+          ntlaks<span className="text-amber">.dev</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -133,13 +133,13 @@ const Navbar = () => {
           {/* Served by the Netlify /writing proxy, not this SPA: must stay a
               plain full-page link, never a router Link. */}
           <a href="/writing" className={menuLinkBaseClass}>
-            Writing
+            Blogs
           </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded text-sm font-mono text-white hover:bg-primary/10 hover:border-primary/50 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            className="px-4 py-2 border border-amber/60 text-amber font-mono text-xs tracking-[0.18em] uppercase hover:bg-amber hover:text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
           >
             My Course
           </a>
@@ -149,23 +149,23 @@ const Navbar = () => {
           ref={menuButtonRef}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-paper transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-paper transition-all duration-300 ${
               isOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-paper transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -178,7 +178,7 @@ const Navbar = () => {
         aria-label="Close menu"
         aria-hidden={!isOpen}
         tabIndex={isOpen ? 0 : -1}
-        className={`md:hidden fixed inset-0 top-20 bg-black/40 transition-opacity duration-300 ${
+        className={`md:hidden fixed inset-0 top-20 bg-ink/60 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
@@ -187,7 +187,7 @@ const Navbar = () => {
         id="mobile-menu"
         ref={menuRef}
         aria-hidden={!isOpen}
-        className={`md:hidden fixed top-20 left-0 w-full bg-dark/95 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
+        className={`md:hidden fixed top-20 left-0 w-full bg-ink/95 backdrop-blur-md border-b border-line transition-all duration-300 ${
           isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible pointer-events-none"
@@ -199,7 +199,7 @@ const Navbar = () => {
               key={link.label}
               href={`/#${link.sectionId}`}
               onClick={(event) => handleSectionLinkClick(link.sectionId, event)}
-              className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+              className="font-mono text-sm tracking-[0.18em] uppercase text-draft hover:text-amber transition-colors py-2 border-b border-line/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
             >
               {link.label}
             </a>
@@ -207,16 +207,16 @@ const Navbar = () => {
           <a
             href="/writing"
             onClick={handleLinkClick}
-            className="text-lg font-mono text-slate-300 hover:text-primary transition-colors py-2 border-b border-white/5 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            className="font-mono text-sm tracking-[0.18em] uppercase text-draft hover:text-amber transition-colors py-2 border-b border-line/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
           >
-            Writing
+            Blogs
           </a>
           <a
             href="https://www.udemy.com/user/ntlakanipho-mgaguli/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleLinkClick}
-            className="mt-2 px-4 py-3 bg-primary/10 border border-primary/50 rounded text-center font-mono text-primary hover:bg-primary/20 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            className="mt-2 px-4 py-3 border border-amber/60 text-center font-mono text-sm tracking-[0.18em] uppercase text-amber hover:bg-amber hover:text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"
           >
             My Course
           </a>

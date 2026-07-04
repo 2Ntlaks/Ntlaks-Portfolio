@@ -1,123 +1,144 @@
 import React from "react";
 import { PUBLIC_STATS } from "../constants/publicStats";
+import SectionHeading from "./SectionHeading";
+
+const ExternalIcon = () => (
+  <svg
+    className="w-4 h-4"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+    />
+  </svg>
+);
 
 const Projects = () => {
-  const { udemyLectures, udemyLearners, udemyPublicReviews } = PUBLIC_STATS;
+  const { udemyLectures, udemyLearners, udemyCountries, udemyPublicReviews } =
+    PUBLIC_STATS;
 
-  const projects = [
+  const featured = [
+    {
+      plate: "A",
+      title: "Mgaguli Tutoring",
+      description:
+        "My tutoring practice, productized. A dedicated home for one-on-one sessions in C, Java, and engineering fundamentals — where students book time, follow structured tracks, and get unstuck with someone who has sat in their seat.",
+      tags: ["Education", "Live platform"],
+      link: "https://mgagulitutoring.dev",
+      linkLabel: "mgagulitutoring.dev",
+    },
+    {
+      plate: "B",
+      title: "Java Bank Application",
+      description:
+        "A full-stack banking system built in Java with MySQL: account management, transaction history, and complete CRUD, with a custom security implementation for authentication and safe data handling.",
+      tags: ["Java", "MySQL", "Security"],
+      link: "https://github.com/2Ntlaks/Bank-Management-System",
+      linkLabel: "View source",
+    },
+  ];
+
+  const index = [
     {
       title: "WebGL for Beginners",
-      description:
-        `A hands-on Udemy course making 3D graphics accessible. ${udemyLectures} lectures covering shapes, 3D objects, textures, and interactive controls. ${udemyLearners}+ students enrolled with ${udemyPublicReviews} public reviews.`,
-      tech: ["JavaScript", "WebGL", "HTML/CSS"],
+      description: `Udemy course making 3D graphics accessible — ${udemyLectures} lectures, ${udemyLearners}+ students in ${udemyCountries}+ countries, ${udemyPublicReviews} public reviews.`,
+      tags: ["Course", "WebGL"],
       link: "https://www.udemy.com/user/ntlakanipho-mgaguli/",
-      github: null,
-      type: "Course",
     },
     {
       title: "WebGL NDC Visualizer",
       description:
-        "An interactive teaching tool for WebGL's Normalized Device Coordinate space. Click-to-place vertices, live preview across all 7 primitive types, and auto-generated copyable shader code.",
-      tech: ["React", "Vite", "WebGL"],
+        "Interactive teaching tool for Normalized Device Coordinates: click-to-place vertices, live preview of all 7 primitive types, copyable shader code.",
+      tags: ["React", "WebGL"],
       link: "https://github.com/2Ntlaks/WebGL-NDC-Visualizer",
-      github: "https://github.com/2Ntlaks/WebGL-NDC-Visualizer",
-      type: "Teaching Tool",
-    },
-    {
-      title: "Full-Stack Banking System",
-      description:
-        "A secure banking application with full CRUD functionality. Features custom security implementation, user management, and transaction history backed by MySQL.",
-      tech: ["Java", "MySQL", "Security"],
-      link: "https://github.com/2Ntlaks/Bank-Management-System",
-      github: "https://github.com/2Ntlaks/Bank-Management-System",
-      type: "Full-Stack",
     },
     {
       title: "Car in WebGL",
       description:
-        "A raw-WebGL 2D car built without frameworks or libraries. Two progressive versions walk through triangulating shapes, driving vertex/fragment shaders, and animating with transformation matrices.",
-      tech: ["JavaScript", "WebGL", "GLSL"],
+        "A 2D car in raw WebGL, no libraries — two progressive versions covering triangulation, shaders, and matrix-driven animation.",
+      tags: ["GLSL", "WebGL"],
       link: "https://github.com/2Ntlaks/Car-in-WebGL",
-      github: "https://github.com/2Ntlaks/Car-in-WebGL",
-      type: "Graphics",
     },
   ];
 
   return (
-    <section id="projects" className="py-24 px-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-mono font-bold text-white mb-12">
-        <span className="text-primary">03.</span> Featured Projects
-      </h2>
+    <section id="projects" className="relative py-28 px-6">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading fig="03" title="Projects" note="Selected plates" />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, index) => (
-          <div
-            key={index}
-            className="group bg-surface p-8 rounded-xl border border-white/5 hover:border-primary/30 transition-all hover:-translate-y-1"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <div className="text-secondary font-mono text-xs px-2 py-1 bg-secondary/10 rounded">
-                {project.type}
-              </div>
-              <div className="flex gap-3">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-400 hover:text-primary transition-colors"
-                    aria-label="View on GitHub"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {featured.map((project) => (
+            <a
+              key={project.plate}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="corners group relative border border-line bg-panel p-8 md:p-10 flex flex-col hover:border-amber/50 transition-colors duration-300"
+            >
+              <p className="font-mono text-[0.65rem] tracking-[0.3em] uppercase text-amber mb-6">
+                Plate {project.plate} — Featured
+              </p>
+
+              <h3 className="font-display font-semibold text-2xl md:text-3xl text-paper mb-4 group-hover:text-amber transition-colors duration-300">
+                {project.title}
+              </h3>
+
+              <p className="text-draft leading-relaxed mb-8 flex-1">
+                {project.description}
+              </p>
+
+              <div className="flex items-center justify-between gap-4 pt-5 border-t border-dashed border-line">
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-xs text-faint uppercase tracking-wider"
                     >
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                  </a>
-                )}
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-primary transition-colors"
-                  aria-label="View project"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-
-            <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-              {project.description}
-            </p>
-
-            <div className="flex flex-wrap gap-3 mt-auto">
-              {project.tech.map((tech) => (
-                <span key={tech} className="text-xs font-mono text-slate-500">
-                  {tech}
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <span className="inline-flex items-center gap-2 font-mono text-xs text-draft group-hover:text-amber transition-colors whitespace-nowrap">
+                  {project.linkLabel}
+                  <ExternalIcon />
                 </span>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <p className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint mb-4">
+          Index of further work
+        </p>
+        <ul className="border-t border-line">
+          {index.map((project) => (
+            <li key={project.title}>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group grid sm:grid-cols-[14rem_1fr_auto] gap-2 sm:gap-8 items-baseline py-5 border-b border-line/50 hover:bg-panel/60 transition-colors duration-200 px-2 -mx-2"
+              >
+                <span className="font-display font-medium text-lg text-paper group-hover:text-amber transition-colors">
+                  {project.title}
+                </span>
+                <span className="text-draft text-sm leading-relaxed">
+                  {project.description}
+                </span>
+                <span className="hidden sm:flex items-center gap-3 font-mono text-xs text-faint">
+                  {project.tags.join(" · ")}
+                  <ExternalIcon />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

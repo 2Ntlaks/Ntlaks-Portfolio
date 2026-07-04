@@ -9,9 +9,9 @@ import { applySeo } from "../utils/seo";
 const Home = () => {
   useEffect(() => {
     applySeo({
-      title: "Ntlakanipho Mgaguli | Developer & WebGL Instructor",
+      title: "Ntlakanipho Mgaguli | WebGL Instructor & Developer",
       description:
-        "Full-stack developer and WebGL instructor based in Cape Town. Specializing in 3D graphics, Java, and web development.",
+        "Developer and WebGL instructor in Cape Town, teaching students across 40+ countries. Specializing in 3D graphics, Java, and web development.",
       path: "/",
     });
   }, []);

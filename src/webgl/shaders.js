@@ -73,20 +73,20 @@ export const fragmentShaderSource = `
     float filaments = smoothstep(0.2, 0.95, waves * 0.5 + 0.5);
     float sparks = pow(max(0.0, 1.0 - abs(fract((structure + time) * 14.0) - 0.5) * 2.0), 28.0);
 
-    vec3 base = vec3(0.03, 0.04, 0.07);
-    vec3 cyan = vec3(0.00, 0.94, 1.00);
-    vec3 magenta = vec3(1.00, 0.00, 0.24);
+    vec3 base = vec3(0.024, 0.063, 0.106);
+    vec3 draftBlue = vec3(0.42, 0.64, 0.84);
+    vec3 amber = vec3(1.00, 0.65, 0.26);
 
     vec3 color = base;
-    color += cyan * (filaments * 0.85 + pointerGlow * 0.30);
-    color += magenta * (pow(structure, 2.2) * 0.55 + pointerGlow * 0.22);
-    color += mix(cyan, magenta, 0.5 + 0.5 * sin(time + structure * 9.0)) * sparks * 0.18;
+    color += draftBlue * (filaments * 0.50 + pointerGlow * 0.25);
+    color += amber * (pow(structure, 2.2) * 0.42 + pointerGlow * 0.24);
+    color += mix(draftBlue, amber, 0.5 + 0.5 * sin(time + structure * 9.0)) * sparks * 0.16;
 
     float vignette = smoothstep(1.5, 0.25, length(p));
     color *= vignette;
 
     float glowLines = smoothstep(0.72, 0.98, filaments) * 0.25;
-    color += vec3(0.12, 0.10, 0.18) * glowLines;
+    color += vec3(0.10, 0.13, 0.17) * glowLines;
 
     gl_FragColor = vec4(color, 1.0);
   }

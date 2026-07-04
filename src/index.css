@@ -1,13 +1,22 @@
 @import "tailwindcss";
 
+/*
+  Drafting-table theme: Prussian-blue ink, fine blueprint grid,
+  amber drafting-lamp accent. Bricolage Grotesque for display,
+  IBM Plex Sans/Mono for body and annotations.
+*/
 @theme {
-  --color-primary: #00f0ff; /* Cyan */
-  --color-secondary: #ff003c; /* Magenta */
-  --color-dark: #0a0a0a; /* Deep Charcoal */
-  --color-surface: #121212; /* Slightly lighter background */
+  --color-ink: #0a1b2a; /* page background — deep prussian blue */
+  --color-panel: #0f2438; /* raised surfaces / plates */
+  --color-line: #1d3a55; /* grid lines, borders, rules */
+  --color-draft: #8fb5d1; /* pale blueprint blue — secondary text */
+  --color-faint: #5d7e99; /* muted annotations */
+  --color-paper: #edf4f9; /* primary text */
+  --color-amber: #ffb454; /* drafting-lamp accent */
 
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Bricolage Grotesque", "Georgia", serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 @layer base {
@@ -16,7 +25,26 @@
   }
 
   body {
-    @apply bg-dark text-slate-200 font-sans antialiased selection:bg-primary selection:text-dark;
+    @apply bg-ink text-draft font-sans antialiased selection:bg-amber selection:text-ink;
+  }
+
+  /* Fixed drafting grid behind everything: fine 24px lines, heavier 120px majors. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(143, 181, 209, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143, 181, 209, 0.045) 1px, transparent 1px),
+      linear-gradient(rgba(143, 181, 209, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143, 181, 209, 0.07) 1px, transparent 1px);
+    background-size:
+      24px 24px,
+      24px 24px,
+      120px 120px,
+      120px 120px;
   }
 
   section[id] {
@@ -29,12 +57,12 @@
   h4,
   h5,
   h6 {
-    @apply font-mono font-bold tracking-tight;
+    @apply font-display tracking-tight;
   }
 
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid #00f0ff;
+    outline: 2px solid var(--color-amber);
     outline-offset: 2px;
   }
 }
@@ -45,17 +73,44 @@
   }
 }
 
+/* Amber L-marks on opposing corners — used on plates and framed images. */
+.corners {
+  position: relative;
+}
+
+.corners::before,
+.corners::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.corners::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-amber);
+  border-left: 2px solid var(--color-amber);
+}
+
+.corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--color-amber);
+  border-right: 2px solid var(--color-amber);
+}
+
 .skip-link {
   position: fixed;
   left: 1rem;
   top: 0.75rem;
   z-index: 70;
   padding: 0.5rem 0.875rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(0, 240, 255, 0.45);
-  background: rgba(10, 10, 10, 0.95);
-  color: #fff;
-  font-family: "JetBrains Mono", monospace;
+  border: 1px solid rgba(255, 180, 84, 0.6);
+  background: rgba(10, 27, 42, 0.97);
+  color: var(--color-paper);
+  font-family: "IBM Plex Mono", monospace;
   font-size: 0.75rem;
   transform: translateY(-200%);
   transition: transform 200ms ease;
