@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 /*
-  Drafting-table theme: Prussian-blue ink, fine blueprint grid,
-  amber drafting-lamp accent. Bricolage Grotesque for display,
-  IBM Plex Sans/Mono for body and annotations.
+  Sleek white drafting theme: warm paper white, graphite ink,
+  hairline rules, burnt-amber accent. Same drafting-table language
+  as before, now drawn on white vellum instead of blueprint stock.
+
+  Note: token names kept from the dark theme so components stay
+  untouched — "ink" is now the white page background and "paper"
+  is the near-black primary text.
 */
 @theme {
-  --color-ink: #0a1b2a; /* page background — deep prussian blue */
-  --color-panel: #0f2438; /* raised surfaces / plates */
-  --color-line: #1d3a55; /* grid lines, borders, rules */
-  --color-draft: #8fb5d1; /* pale blueprint blue — secondary text */
-  --color-faint: #5d7e99; /* muted annotations */
-  --color-paper: #edf4f9; /* primary text */
-  --color-amber: #ffb454; /* drafting-lamp accent */
+  --color-ink: #fcfcfa; /* page background — warm paper white */
+  --color-panel: #f5f4f0; /* raised surfaces / plates */
+  --color-line: #e5e3dc; /* grid lines, borders, rules */
+  --color-draft: #565a63; /* graphite — secondary text */
+  --color-faint: #74777f; /* muted annotations */
+  --color-paper: #16181d; /* primary text — near-black ink */
+  --color-amber: #b45309; /* burnt-amber accent */
 
   --font-display: "Bricolage Grotesque", "Georgia", serif;
   --font-sans: "IBM Plex Sans", system-ui, sans-serif;
@@ -36,10 +40,10 @@
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(rgba(143, 181, 209, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(143, 181, 209, 0.045) 1px, transparent 1px),
-      linear-gradient(rgba(143, 181, 209, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(143, 181, 209, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(22, 24, 29, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 24, 29, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(22, 24, 29, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 24, 29, 0.05) 1px, transparent 1px);
     background-size:
       24px 24px,
       24px 24px,
@@ -107,8 +111,8 @@
   top: 0.75rem;
   z-index: 70;
   padding: 0.5rem 0.875rem;
-  border: 1px solid rgba(255, 180, 84, 0.6);
-  background: rgba(10, 27, 42, 0.97);
+  border: 1px solid rgba(180, 83, 9, 0.6);
+  background: rgba(252, 252, 250, 0.97);
   color: var(--color-paper);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.75rem;

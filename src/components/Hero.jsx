@@ -139,7 +139,7 @@ const Hero = () => {
       )}
 
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,27,42,0.7)_70%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(252,252,250,0.7)_70%)] pointer-events-none" />
 
       {/* Drafting annotations pinned to the plate corners */}
       <p className="absolute top-24 left-6 font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint pointer-events-none hidden sm:block">

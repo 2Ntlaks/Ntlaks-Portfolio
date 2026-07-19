@@ -19,7 +19,8 @@ const footerLinks = [
   },
   /* /writing is served by a Netlify proxy — keep as a plain link. */
   { label: "Blogs", href: "/writing", external: false },
-  { label: "CV", href: "/ntlaks-resume-2025.pdf", external: false },
+  /* Same-origin PDF, but open in a new tab so visitors keep the site. */
+  { label: "CV", href: "/ntlaks-resume-2025.pdf", external: true },
 ];
 
 const Footer = () => {

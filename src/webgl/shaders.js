@@ -73,20 +73,25 @@ export const fragmentShaderSource = `
     float filaments = smoothstep(0.2, 0.95, waves * 0.5 + 0.5);
     float sparks = pow(max(0.0, 1.0 - abs(fract((structure + time) * 14.0) - 0.5) * 2.0), 28.0);
 
-    vec3 base = vec3(0.024, 0.063, 0.106);
-    vec3 draftBlue = vec3(0.42, 0.64, 0.84);
-    vec3 amber = vec3(1.00, 0.65, 0.26);
+    /* Light theme: ink drawn on warm paper white — pigments are
+       subtracted from the base instead of glowing out of darkness. */
+    vec3 base = vec3(0.988, 0.988, 0.980);
+    vec3 graphite = vec3(0.55, 0.53, 0.48);
+    vec3 amberInk = vec3(0.04, 0.30, 0.62);
 
-    vec3 color = base;
-    color += draftBlue * (filaments * 0.50 + pointerGlow * 0.25);
-    color += amber * (pow(structure, 2.2) * 0.42 + pointerGlow * 0.24);
-    color += mix(draftBlue, amber, 0.5 + 0.5 * sin(time + structure * 9.0)) * sparks * 0.16;
-
-    float vignette = smoothstep(1.5, 0.25, length(p));
-    color *= vignette;
+    vec3 pigment = vec3(0.0);
+    pigment += graphite * (filaments * 0.16 + pointerGlow * 0.12);
+    pigment += amberInk * (pow(structure, 2.2) * 0.30 + pointerGlow * 0.22);
+    pigment += mix(graphite, amberInk, 0.5 + 0.5 * sin(time + structure * 9.0)) * sparks * 0.12;
 
     float glowLines = smoothstep(0.72, 0.98, filaments) * 0.25;
-    color += vec3(0.10, 0.13, 0.17) * glowLines;
+    pigment += graphite * glowLines * 0.30;
+
+    /* Ink fades toward the edges so the plate dissolves into the page. */
+    float vignette = smoothstep(1.5, 0.25, length(p));
+    pigment *= vignette;
+
+    vec3 color = base - pigment;
 
     gl_FragColor = vec4(color, 1.0);
   }
