@@ -14,7 +14,7 @@ const NotFoundPage = () => {
   return (
     <section className="lost holes">
       <div className="wrap lost-inner">
-        <SevenSeg value={404} animate={false} label="Open circuit" />
+        <SevenSeg value={404} label="Open circuit" />
         <h1 className="display">Nothing is wired here.</h1>
         <p>
           This address isn&apos;t connected to anything on the board. It may

@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
+import Tutoring from "../components/Tutoring";
 import Writing from "../components/Writing";
 import Contact from "../components/Contact";
 import Rail from "../components/Rail";
@@ -13,7 +14,7 @@ const Home = () => {
     applySeo({
       title: "Ntlakanipho Mgaguli | WebGL Instructor & Developer",
       description:
-        "Developer and WebGL instructor in Cape Town, teaching students across 40+ countries. Specializing in 3D graphics, Java, and web development.",
+        "Final-year Computer Engineering student in Cape Town, open to internships and graduate roles. I build a tutoring platform, a Java payments API and WebGL tools, and teach WebGL to 160+ students on Udemy.",
       path: "/",
     });
   }, []);
@@ -25,6 +26,7 @@ const Home = () => {
       <About />
       <Skills />
       <Projects />
+      <Tutoring />
       <Rail />
       <Writing />
       <Rail />

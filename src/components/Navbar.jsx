@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { LINKS, SECTIONS } from "../constants/site";
+import { EMAIL, LINKS, SECTIONS } from "../constants/site";
 
 const Navbar = () => {
   const menuRef = useRef(null);
@@ -68,7 +68,6 @@ const Navbar = () => {
 
   const sectionLinks = SECTIONS.map((s) => (
     <a key={s.id} href={`/#${s.id}`} onClick={(e) => handleSectionLinkClick(s.id, e)} className="nav-link">
-      <b>{s.ref}</b>
       {s.label}
     </a>
   ));
@@ -90,8 +89,8 @@ const Navbar = () => {
           <a href={LINKS.writing} className="nav-link">
             Blogs
           </a>
-          <a href={LINKS.udemy} target="_blank" rel="noopener noreferrer" className="btn btn-solid nav-cta">
-            My course
+          <a href={`mailto:${EMAIL}`} className="btn btn-solid nav-cta">
+            Email me
           </a>
         </div>
 
@@ -125,14 +124,8 @@ const Navbar = () => {
           <a href={LINKS.writing} onClick={() => setIsOpen(false)} className="nav-link">
             Blogs
           </a>
-          <a
-            href={LINKS.udemy}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsOpen(false)}
-            className="btn btn-solid"
-          >
-            My course
+          <a href={`mailto:${EMAIL}`} onClick={() => setIsOpen(false)} className="btn btn-solid">
+            Email me
           </a>
         </div>
       </div>

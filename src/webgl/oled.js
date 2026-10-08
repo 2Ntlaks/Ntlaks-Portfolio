@@ -153,15 +153,14 @@ export class OledRenderer {
     this.gl = glCanvas.getContext("webgl", { antialias: false, alpha: false, preserveDrawingBuffer: false });
     this.isReady = Boolean(this.gl && this.ctx);
 
-    this.shape = 0;
-    this.nextShape = 0;
+    this.shape = 1; // open on the cube: its edges read best at 128×64
+    this.nextShape = 1;
     this.mix = 0;
     this.morphStart = -1;
     this.rot = { x: 0.6, y: 0.5 };
     this.spin = reducedMotion ? 0 : 0.55; // rad/s auto-rotate
     this.dragging = false;
     this.lastFrame = 0;
-    this.fps = 60;
     this.bootStart = -1;
     this.bootDone = reducedMotion;
 
@@ -237,7 +236,6 @@ export class OledRenderer {
     if (!this.isReady) return;
     if (this.bootStart < 0) this.bootStart = now;
     const dt = this.lastFrame ? Math.min(0.1, (now - this.lastFrame) / 1000) : 0;
-    if (dt > 0) this.fps += (1 / dt - this.fps) * 0.05;
     this.lastFrame = now;
 
     if (!this.dragging) this.rot.x += this.spin * dt;
@@ -275,8 +273,8 @@ export class OledRenderer {
     // Yellow status band
     ctx.fillStyle = "#ffd23f";
     drawText(ctx, "NTLAKS.DEV", 2, 2);
-    const fps = `${Math.round(Math.min(99, this.fps))}FPS`;
-    drawText(ctx, this.bootDone ? fps : "--FPS", OLED_W - 2 - textWidth(this.bootDone ? fps : "--FPS"), 2);
+    const tag = this.bootDone ? "WEBGL" : "BOOT";
+    drawText(ctx, tag, OLED_W - 2 - textWidth(tag), 2);
     const shapeName = SHAPES[this.morphStart >= 0 ? this.nextShape : this.shape];
     drawText(ctx, `> ${shapeName}`, 2, 9);
     const hint = "SW1: NEXT";
