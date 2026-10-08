@@ -19,7 +19,7 @@ const Footer = () => (
         <div>
           <p className="foot-name">Ntlakanipho Mgaguli</p>
           <p className="mono" style={{ margin: "8px 0 0" }}>
-            Computer Engineering · WebGL instructor · Tutor
+            Final-year Computer Engineering · Cape Town
           </p>
         </div>
         <nav aria-label="Footer" className="foot-links mono">

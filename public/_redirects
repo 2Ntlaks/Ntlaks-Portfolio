@@ -1,9 +1,9 @@
 # Writing/blog lives in its own repo (2Ntlaks/-ntlaks-writing) deployed as
 # the Netlify site "ntlaks-writing"; these proxy rules serve it under this
-# domain. They MUST stay above the SPA catch-all, which would otherwise
-# swallow them (Netlify uses first-match).
+# domain. Keep them first: Netlify uses first-match.
 /writing/* https://ntlaks-writing.netlify.app/writing/:splat 200
 /writing   https://ntlaks-writing.netlify.app/writing/     200
 
-# SPA fallback for the React Router portfolio.
-/* /index.html 200
+# No SPA catch-all: the portfolio has a single route ("/"). Unknown paths
+# get dist/404.html (a copy of index.html made at build time), which renders
+# the React 404 page while Netlify returns a real 404 status.

@@ -25,7 +25,7 @@ const Rig = () => {
   const rendererRef = useRef(null);
   const [ledOn, setLedOn] = useState(false);
   const [switchDown, setSwitchDown] = useState(false);
-  const [shapeIndex, setShapeIndex] = useState(0);
+  const [shapeIndex, setShapeIndex] = useState(1);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -180,8 +180,14 @@ const Rig = () => {
           <text x="130" y="504">3V3</text>
           <text x="200" y="504">R1 220Ω</text>
           <text x="292" y="504">D1</text>
-          <text x="368" y="504">SW1 · NEXT</text>
+          <text x="368" y="504">SW1</text>
           <text x="552" y="76" textAnchor="end">TO ESP32 · SDA 21 · SCL 22</text>
+        </g>
+        <g className="rig-cue" fontFamily="Martian Mono, monospace" fontSize="12" fontWeight="500">
+          <path d="M452 440 C432 440 420 444 410 452" fill="none" strokeWidth="2" strokeLinecap="round" />
+          <path d="M410 452 l9 -1 M410 452 l3 -8" fill="none" strokeWidth="2" strokeLinecap="round" />
+          <text x="458" y="436">PRESS ME</text>
+          <text x="458" y="452" opacity="0.75">change shape</text>
         </g>
 
         {/* Jumper wires */}
@@ -229,7 +235,7 @@ const Rig = () => {
 };
 
 const Hero = () => {
-  const { udemyLearners, udemyCountries, udemyLectures } = PUBLIC_STATS;
+  const { udemyLearners, tutoringStudents, udemyRating } = PUBLIC_STATS;
 
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -237,7 +243,7 @@ const Hero = () => {
         <div className="hero-copy">
           <p className="hero-status mono">
             <span className="led-dot" aria-hidden="true" />
-            Open to internships &amp; tutoring
+            Final year · open to internships &amp; graduate roles
           </p>
 
           <h1 id="hero-title" className="display">
@@ -246,22 +252,24 @@ const Hero = () => {
           </h1>
 
           <p className="hero-say">
-            I build interactive 3D, then I <em>teach how it works.</em>
+            I build real software, from shaders to payment APIs, then I{" "}
+            <em>teach how it works.</em>
           </p>
 
           <p className="hero-lede">
             Final-year Computer Engineering student at CPUT in Cape Town. I
-            teach WebGL on Udemy, run{" "}
+            run{" "}
             <a href="https://mgagulitutoring.dev" target="_blank" rel="noopener noreferrer" className="text-ink underline decoration-signal decoration-2 underline-offset-4 hover:text-signal-ink">
               Mgaguli Tutoring
             </a>
-            , and spend the time in between on a breadboard. The little screen
-            here is a WebGL shader pretending to be the OLED on mine.
+            , teach WebGL on Udemy, and I&apos;m finishing my final-year project
+            on an ESP32. The little screen here is a WebGL shader pretending to
+            be the OLED on it.
           </p>
 
           <div className="hero-ctas">
-            <a href="#projects" className="btn btn-solid">
-              See the work
+            <a href="#work" className="btn btn-solid">
+              See my work
               <span aria-hidden="true">↓</span>
             </a>
             <a href={`mailto:${EMAIL}`} className="btn btn-line">
@@ -270,9 +278,9 @@ const Hero = () => {
           </div>
 
           <div className="hero-stats">
-            <SevenSeg value={udemyLearners} plus label="Students" />
-            <SevenSeg value={udemyCountries} plus label="Countries" />
-            <SevenSeg value={udemyLectures} label="Lectures" />
+            <SevenSeg value={udemyLearners} plus label="Udemy students" />
+            <SevenSeg value={tutoringStudents} plus label="Students tutored" />
+            <SevenSeg value={udemyRating} label="Course rating" />
           </div>
         </div>
 

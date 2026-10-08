@@ -30,10 +30,9 @@ const Contact = () => {
       <div className="wrap contact-inner">
         <SectionHeading
           id="contact-title"
-          designator="J5"
-          label="Contact · one wire, no forms"
+          label="Contact"
           title="Close the circuit."
-          intro="Hiring, learning or building something? Email reaches me directly and I reply personally: internships, tutoring requests or course ideas."
+          intro="Hiring for an internship or graduate role, looking for a tutor, or building something? Email reaches me directly and I reply personally."
         />
 
         <a className="contact-mail" href={`mailto:${EMAIL}`}>

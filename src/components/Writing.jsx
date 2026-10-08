@@ -11,10 +11,9 @@ const Writing = () => {
       <div className="wrap">
         <SectionHeading
           id="writing-title"
-          designator="J4"
-          label="Writing · lab notebook"
-          title="Field notes."
-          intro="What I build gets written up so someone else can build it too."
+          label="Blogs"
+          title="I write up what I build."
+          intro="So someone else can build it too."
         />
 
         <div className="notes-grid">
@@ -52,7 +51,7 @@ const Writing = () => {
 
         <div className="notes-all">
           <a href={LINKS.writing} className="btn btn-line">
-            All posts on the blog <span aria-hidden="true">→</span>
+            All blog posts <span aria-hidden="true">→</span>
           </a>
         </div>
       </div>
