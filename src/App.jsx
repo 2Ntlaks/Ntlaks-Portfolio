@@ -7,12 +7,12 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-ink text-paper">
+    <div className="relative min-h-screen">
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="relative z-10">
+      <main id="main-content" tabIndex={-1} className="relative">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFoundPage />} />

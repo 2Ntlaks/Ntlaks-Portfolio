@@ -7,8 +7,9 @@ Live site: [ntlaks.dev](https://ntlaks.dev)
 Portfolio website for **Ntlakanipho Mgaguli**: Computer Engineering student, WebGL instructor, and tutor based in Cape Town, South Africa.
 
 ## Features
-- Drafting-table design system: blueprint grid, plate-style project cards, "Fig." annotations.
-- Interactive WebGL hero experience.
+- Breadboard design system: real 0.1" hole pitch, power-rail dividers, J1–J5 section headers.
+- WebGL hero: a fragment shader rendering a 128×64, 1-bit dithered "SSD1306 OLED" (press SW1 to morph the shape, drag to rotate).
+- Skills as a 14-pin DIP pinout with a multimeter readout, projects as PCB modules, About as a datasheet.
 - Responsive design with accessibility improvements.
 - SEO metadata and structured data.
 - Email-first contact (no forms).

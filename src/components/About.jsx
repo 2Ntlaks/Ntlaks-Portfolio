@@ -1,160 +1,199 @@
 import React from "react";
 import profilePhoto from "../assets/profile.jpg";
+import esp32Photo from "../assets/bench/esp32-breadboard.jpg";
+import piPhoto from "../assets/bench/pi-multimeter.jpg";
+import lessonPhoto from "../assets/bench/arrays-lesson.jpg";
 import { PUBLIC_STATS } from "../constants/publicStats";
+import { EMAIL, LINKS } from "../constants/site";
 import SectionHeading from "./SectionHeading";
+
+const benchPhotos = [
+  {
+    src: esp32Photo,
+    alt: "An ESP32 on a breadboard wired to a small OLED screen, a relay, a buzzer and an 18650 battery, with a laptop of code behind it",
+    caption: "ESP32 bring-up: OLED, relay, buzzer and an 18650 cell.",
+  },
+  {
+    src: piPhoto,
+    alt: "A Raspberry Pi, a yellow multimeter with red probes and a laptop showing a board diagram on a desk",
+    caption: "Raspberry Pi, multimeter and the datasheet open.",
+  },
+  {
+    src: lessonPhoto,
+    alt: "A laptop showing a lesson titled Arrays in Java by Ntlakanipho Mgaguli, with a drawing tablet in front",
+    caption: "Writing up “Arrays in Java” for my students.",
+  },
+];
 
 const About = () => {
   const { udemyLearners, udemyCountries, udemyLectures } = PUBLIC_STATS;
 
-  const stats = [
-    { value: `${udemyLearners}+`, label: "Students taught" },
-    { value: `${udemyCountries}+`, label: "Countries reached" },
-    { value: udemyLectures, label: "Course lectures" },
-  ];
-
-  const practice = [
-    {
-      index: "a",
-      title: "Build",
-      detail:
-        "Practical software and engineering tools that solve real student and developer problems — from banking systems in Java to raw-WebGL teaching demos.",
-    },
-    {
-      index: "b",
-      title: "Teach",
-      detail:
-        "Complex topics like WebGL and systems concepts, broken into step-by-step lessons that students across 40+ countries apply immediately.",
-    },
-    {
-      index: "c",
-      title: "Tutor",
-      detail:
-        "One-on-one mentoring in C, Java, and engineering fundamentals through Mgaguli Tutoring, focused on clear understanding and results.",
-    },
-  ];
-
-  const learnLinks = [
-    { name: "Mgaguli Tutoring", url: "https://mgagulitutoring.dev" },
-    { name: "Udemy", url: "https://www.udemy.com/user/ntlakanipho-mgaguli/" },
-    { name: "YouTube", url: "https://www.youtube.com/@ntlakaniphomgaguli" },
-    { name: "TikTok", url: "https://www.tiktok.com/@ntlakanipho_mgaguli" },
+  const learn = [
+    { name: "Mgaguli Tutoring", url: LINKS.tutoring },
+    { name: "Udemy course", url: LINKS.udemy },
+    { name: "YouTube", url: LINKS.youtube },
+    { name: "TikTok", url: LINKS.tiktok },
   ];
 
   return (
-    <section id="about" className="relative py-28 px-6">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading fig="01" title="About" note="Subject profile" />
+    <section id="about" className="about" aria-labelledby="about-title">
+      <div className="wrap">
+        <SectionHeading
+          id="about-title"
+          designator="J1"
+          label="About · datasheet NM-26"
+          title="Student. Builder. Teacher."
+          intro="Every part on a bench comes with a datasheet. Here's mine."
+        />
 
-        <div className="grid lg:grid-cols-[auto_1fr] gap-12 lg:gap-16 items-start mb-20">
-          <figure className="mx-auto lg:mx-0">
-            <div className="corners border border-line bg-panel p-3">
-              <img
-                src={profilePhoto}
-                alt="Ntlakanipho Mgaguli"
-                className="w-56 h-56 lg:w-64 lg:h-64 object-cover"
-              />
-            </div>
-            <figcaption className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-faint mt-3 text-center lg:text-left">
-              Subject — N. Mgaguli, CPUT
-            </figcaption>
-          </figure>
-
-          <div className="space-y-8 text-center lg:text-left">
-            <h3 className="font-display font-semibold text-2xl md:text-3xl text-paper">
-              Student. Builder. Educator.
-            </h3>
-
-            <p className="text-draft leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              I&apos;m a final-year Computer Engineering student at{" "}
-              <strong className="text-paper font-medium">
-                Cape Peninsula University of Technology
-              </strong>
-              , building across hardware and software with a project-first
-              approach. On Udemy I teach WebGL to {udemyLearners}+ students
-              from over {udemyCountries} countries, and through Mgaguli
-              Tutoring I mentor students directly in C, Java, and core
-              engineering fundamentals.
-            </p>
-
-            <div className="grid grid-cols-3 sm:inline-flex sm:items-stretch divide-x divide-line border border-line bg-panel/60 w-full sm:w-auto">
-              {stats.map((stat) => (
-                <div key={stat.label} className="px-2 sm:px-7 py-4 text-center sm:text-left">
-                  <p className="font-display font-semibold text-2xl md:text-3xl text-amber">
-                    {stat.value}
-                  </p>
-                  <p className="font-mono text-[0.6rem] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-faint mt-1">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <blockquote className="border-l-2 border-amber pl-5 py-1 max-w-2xl mx-auto lg:mx-0 text-left">
-              <p className="font-display text-xl text-paper italic">
-                &ldquo;Learn deeply. Build practically. Teach clearly.&rdquo;
-              </p>
-            </blockquote>
+        <article className="sheet">
+          <div className="sheet-head">
+            <span className="pn">NM-26</span>
+            <span className="mid mono">Computer engineer &amp; educator</span>
+            <span className="mono" style={{ color: "var(--color-ink-3)" }}>
+              Rev. Oct 2026
+            </span>
           </div>
-        </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-line border border-line mb-20">
-          {practice.map((item) => (
-            <div key={item.title} className="bg-panel p-7">
-              <p className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint mb-3">
-                01.{item.index}
-              </p>
-              <h4 className="font-display font-semibold text-xl text-paper mb-3">
-                {item.title}
-              </h4>
-              <p className="text-draft text-sm leading-relaxed">{item.detail}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="corners border border-line bg-panel/70 p-8 md:p-10">
-          <div className="flex flex-col md:flex-row md:items-start gap-10">
-            <div className="flex-1 space-y-4">
-              <p className="font-mono text-xs tracking-[0.25em] uppercase text-amber">
-                Current focus
-              </p>
-              <h3 className="font-display font-semibold text-xl md:text-2xl text-paper">
-                AI, cloud, and better learning systems
-              </h3>
-              <p className="text-draft leading-relaxed">
-                I see <strong className="text-paper font-medium">AI as an amplifier</strong>{" "}
-                — not a replacement, but a way to multiply strong fundamentals.
-                I&apos;m currently expanding into AWS cloud services while
-                growing Mgaguli Tutoring into a home for practical,
-                project-driven technical courses.
-              </p>
-            </div>
-
-            <div className="md:max-w-xs w-full">
-              <p className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-faint mb-4">
-                Learn with me
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {learnLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2.5 border border-line text-draft font-mono text-xs text-center hover:border-amber/60 hover:text-amber transition-colors duration-300"
-                  >
-                    {link.name}
-                  </a>
-                ))}
+          <div className="sheet-body">
+            <div className="ds-col">
+              <div>
+                <h3 className="ds-title">Ntlakanipho Mgaguli</h3>
+                <p className="ds-sub mono">Final year · Computer Engineering · CPUT</p>
               </div>
-              <a
-                href="mailto:ntlakaniphomgaguli210@gmail.com"
-                className="mt-4 inline-flex items-center justify-center w-full px-4 py-3 border border-amber/60 text-amber font-mono text-xs tracking-[0.15em] uppercase hover:bg-amber hover:text-ink transition-colors"
-              >
-                Open to internships &amp; tutoring
-              </a>
+
+              <div className="ds-sec">
+                <h3>
+                  <span>1</span>Features
+                </h3>
+                <ul className="ds-list">
+                  <li>
+                    <strong>Teaches WebGL on Udemy:</strong> {udemyLearners}+
+                    students in {udemyCountries}+ countries across {udemyLectures} lectures.
+                  </li>
+                  <li>
+                    <strong>Runs Mgaguli Tutoring:</strong> one-on-one help in C,
+                    Java and engineering fundamentals.
+                  </li>
+                  <li>
+                    <strong>Works across hardware and software:</strong> ESP32 and
+                    Raspberry Pi on the bench, Java, React and raw WebGL on screen.
+                  </li>
+                  <li>
+                    <strong>AI-native:</strong> uses AI as an amplifier for strong
+                    fundamentals, not a replacement for them.
+                  </li>
+                  <li>
+                    <strong>Currently adding:</strong> AWS cloud services, and
+                    project-driven courses on Mgaguli Tutoring.
+                  </li>
+                </ul>
+              </div>
+
+              <div className="ds-sec">
+                <h3>
+                  <span>2</span>Description
+                </h3>
+                <p>
+                  I&apos;m a final-year Computer Engineering student at Cape
+                  Peninsula University of Technology, building across hardware
+                  and software with a project-first approach. I learn something
+                  properly, build something real with it, then turn it into a
+                  lesson someone else can follow.
+                </p>
+              </div>
+
+              <div className="ds-sec">
+                <h3>
+                  <span>3</span>Typical application
+                </h3>
+                <p className="ds-quote">Learn deeply. Build practically. Teach clearly.</p>
+              </div>
+            </div>
+
+            <div className="ds-col">
+              <figure className="ds-fig">
+                <img
+                  src={profilePhoto}
+                  alt="Ntlakanipho Mgaguli smiling outside a CPUT building"
+                  width="534"
+                  height="862"
+                  style={{ aspectRatio: "4 / 4.4", objectPosition: "50% 22%" }}
+                  loading="lazy"
+                />
+                <figcaption>
+                  <b>Figure 1.</b> Device photo, CPUT campus.
+                </figcaption>
+              </figure>
+
+              <table className="ds-table">
+                <caption>
+                  <b>Table 1.</b> Recommended operating conditions
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Parameter</th>
+                    <th scope="col">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Location</th>
+                    <td>Cape Town, South Africa</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time zone</th>
+                    <td>SAST (UTC+2)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Status</th>
+                    <td>Open to internships and tutoring</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Interface</th>
+                    <td>
+                      <a href={`mailto:${EMAIL}`} className="underline decoration-signal underline-offset-2 hover:text-signal-ink" style={{ overflowWrap: "anywhere" }}>
+                        Email
+                      </a>
+                      , answered personally
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div className="ds-sec">
+                <h3>
+                  <span>4</span>Learn with me
+                </h3>
+                <div className="ds-learn">
+                  {learn.map((link) => (
+                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer">
+                      {link.name}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+
+          <div className="ds-photos">
+            {benchPhotos.map((photo, i) => (
+              <figure className="ds-fig" key={photo.src}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                <figcaption>
+                  <b>Figure {i + 2}.</b> {photo.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="ds-foot mono">
+            <span>NM-26 datasheet</span>
+            <span>ntlaks.dev</span>
+            <span>Page 1 of 1</span>
+          </div>
+        </article>
       </div>
     </section>
   );

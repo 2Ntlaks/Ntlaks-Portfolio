@@ -1,67 +1,45 @@
 import React from "react";
+import { LINKS } from "../constants/site";
 
 const footerLinks = [
-  {
-    label: "Mgaguli Tutoring",
-    href: "https://mgagulitutoring.dev",
-    external: true,
-  },
-  {
-    label: "Udemy",
-    href: "https://www.udemy.com/user/ntlakanipho-mgaguli/",
-    external: true,
-  },
-  { label: "GitHub", href: "https://github.com/2Ntlaks", external: true },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ntlakanipho-mgaguli-36a1ab319/",
-    external: true,
-  },
+  { label: "Mgaguli Tutoring", href: LINKS.tutoring, external: true },
+  { label: "Udemy", href: LINKS.udemy, external: true },
+  { label: "GitHub", href: LINKS.github, external: true },
+  { label: "LinkedIn", href: LINKS.linkedin, external: true },
   /* /writing is served by a Netlify proxy — keep as a plain link. */
-  { label: "Blogs", href: "/writing", external: false },
+  { label: "Blogs", href: LINKS.writing, external: false },
   /* Same-origin PDF, but open in a new tab so visitors keep the site. */
-  { label: "CV", href: "/ntlaks-resume-2025.pdf", external: true },
+  { label: "CV", href: LINKS.cv, external: true },
 ];
 
-const Footer = () => {
-  return (
-    <footer className="relative border-t border-line bg-panel/40">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="text-center md:text-left">
-            <p className="font-display font-semibold text-lg text-paper">
-              Ntlakanipho Mgaguli
-            </p>
-            <p className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-faint mt-2">
-              Computer Engineering · WebGL Instructor
-            </p>
-          </div>
-
-          <nav
-            aria-label="Footer"
-            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
-          >
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                {...(link.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="font-mono text-xs uppercase tracking-wider text-draft hover:text-amber transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <p className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-faint">
-            &copy; {new Date().getFullYear()} ntlaks.dev
+const Footer = () => (
+  <footer className="foot">
+    <div className="wrap">
+      <div className="foot-grid">
+        <div>
+          <p className="foot-name">Ntlakanipho Mgaguli</p>
+          <p className="mono" style={{ margin: "8px 0 0" }}>
+            Computer Engineering · WebGL instructor · Tutor
           </p>
         </div>
+        <nav aria-label="Footer" className="foot-links mono">
+          {footerLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
       </div>
-    </footer>
-  );
-};
+      <div className="foot-base mono">
+        <span>&copy; {new Date().getFullYear()} ntlaks.dev</span>
+        <span>Designed &amp; wired in Cape Town</span>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;
